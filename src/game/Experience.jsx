@@ -1,5 +1,5 @@
 import { Physics, Debug } from '@react-three/rapier'
-import useGame from './stores/useGame.jsx'
+import useGame from '../stores/useGame.jsx'
 import Lights from './Lights.jsx'
 import { World } from './World.jsx'
 import Player from './Player.jsx'

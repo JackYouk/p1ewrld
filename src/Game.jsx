@@ -1,8 +1,8 @@
 import { Canvas } from '@react-three/fiber'
-import Experience from './Experience.jsx'
+import Experience from './game/Experience.jsx'
 import { Loader } from '@react-three/drei'
 import { Suspense } from 'react'
-import Interface from './Interface.jsx'
+import Interface from './game/Interface.jsx'
 
 
 export default function Game() {

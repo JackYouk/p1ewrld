@@ -3,9 +3,11 @@ import { useFrame } from '@react-three/fiber'
 import { useKeyboardControls, useAnimations, useGLTF, Gltf } from '@react-three/drei'
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import useGame from './stores/useGame.jsx'
+import useGame from '../stores/useGame.jsx'
+import { AvatarContext } from '../stores/avatarContext.jsx'
 
 export default function Player(){
+    const {avatar, setAvatar} = AvatarContext();
     const body = useRef()
     const [ subscribeKeys, getKeys ] = useKeyboardControls()
     const { rapier, world } = useRapier()
@@ -165,6 +167,6 @@ export default function Player(){
             <meshStandardMaterial flatShading color="mediumpurple" />
         </mesh> */}
         {/* <primitive object={fox.scene} scale={0.005} /> */}
-        <Gltf src='./pie.glb' scale={0.04} castShadow/>
+        <Gltf src={avatar.glb} scale={avatar.gameScale} castShadow/>
     </RigidBody>
 }

@@ -1,5 +1,5 @@
 import { useKeyboardControls } from '@react-three/drei'
-import useGame from './stores/useGame.jsx'
+import useGame from '../stores/useGame.jsx'
 import { useEffect, useRef } from 'react'
 import { addEffect } from '@react-three/fiber'
 import { useNavigate } from 'react-router-dom'

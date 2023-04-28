@@ -8,13 +8,68 @@ body,
     width: 100%;
     height: 100%;
     background: ivory;
+    font-family: 'Bebas Neue', cursive;
 }
 
+
+
+/* Market ================================ */
+.btn {
+    width: 120px;
+    height: 30px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+    background: #ffffff44;
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn:hover {
+    background: #ffffff99;
+    cursor: pointer;
+}
+
+.market-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.active-item {
+    padding: 3px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    background: #d349e344;
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.market-item {
+    padding: 3px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    background: #ffffff44;
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.market-item:hover {
+    background: #ffffff99;
+    cursor: pointer;
+}
+
+
 /**
- * Interface
+ * Interface ==============================
  */
-.interface
-{
+.interface {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,8 +82,7 @@ body,
 /**
  * Time
  */
-.time
-{
+.time {
     position: absolute;
     top: 15%;
     left: 0;
@@ -43,8 +97,7 @@ body,
 /**
  * Restart
  */
-.restart
-{
+.restart {
     display: flex;
     justify-content: center;
     position: absolute;
@@ -62,22 +115,19 @@ body,
 /**
  * Controls
  */
-.controls
-{
+.controls {
     position: absolute;
     bottom: 2%;
     right: 0;
     width: 20%;
 }
 
-.controls .raw
-{
+.controls .raw{
     display: flex;
     justify-content: center;
 }
 
-.controls .market
-{
+.controls .market {
     width: 144px;
     height: 40px;
     margin: 4px;
@@ -85,10 +135,12 @@ body,
     background: #ffffff44;
     font-size: xx-large;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.market:hover
-{
+.market:hover {
     width: 144px;
     height: 40px;
     margin: 4px;
@@ -99,8 +151,7 @@ body,
     cursor: pointer;
 }
 
-.controls .key
-{
+.controls .key {
     width: 40px;
     height: 40px;
     margin: 4px;
@@ -108,12 +159,10 @@ body,
     background: #ffffff44;
 }
 
-.controls .key.large
-{
+.controls .key.large {
     width: 144px;
 }
 
-.controls .key.active
-{
+.controls .key.active {
     background: #ffffff99;
 }
