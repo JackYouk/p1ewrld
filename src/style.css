@@ -31,6 +31,23 @@ body,
     cursor: pointer;
 }
 
+.btn-gold {
+    width: 120px;
+    height: 30px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+    background: #e8e24944;
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-gold:hover {
+    background: #eac83099;
+    cursor: pointer;
+}
+
 .market-nav {
     display: flex;
     justify-content: center;
@@ -118,8 +135,7 @@ body,
 .controls {
     position: absolute;
     bottom: 2%;
-    right: 0;
-    width: 20%;
+    left: 50%;
 }
 
 .controls .raw{
