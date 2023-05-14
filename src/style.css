@@ -134,8 +134,8 @@ body,
  */
 .controls {
     position: absolute;
-    bottom: 2%;
-    left: 50%;
+    bottom: 1%;
+    right: 2%;
 }
 
 .controls .raw{
@@ -148,6 +148,7 @@ body,
     height: 40px;
     margin: 4px;
     border: 2px solid #ffffff;
+    color: #ffffff;
     background: #ffffff44;
     font-size: xx-large;
     text-align: center;

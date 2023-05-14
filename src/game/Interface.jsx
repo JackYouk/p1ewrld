@@ -55,7 +55,7 @@ export default function Interface()
         {/* Controls */}
         <div className="controls">
             
-            <div className="raw">
+            {/* <div className="raw">
                 <div className={ `key ${ forward ? 'active' : '' }` }></div>
             </div>
             <div className="raw">
@@ -65,7 +65,7 @@ export default function Interface()
             </div>
             <div className="raw">
                 <div className={ `key large ${ jump ? 'active' : '' }` }></div>
-            </div>
+            </div> */}
             <div className='raw' onClick={() => navigate('/market')}>
                 <div className='market'>Market</div>
             </div>
