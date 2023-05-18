@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import useGame from '../stores/useGame.jsx'
 import { AvatarContext } from '../stores/avatarContext.jsx'
+import nipplejs from 'nipplejs';
+
 
 export default function Player(){
     const {avatar, setAvatar} = AvatarContext();
@@ -75,41 +77,55 @@ export default function Player(){
         }
     }, [])
 
+    let controls = { 
+        forward: false, 
+        backward: false, 
+        leftward: false, 
+        rightward: false 
+    }
+
     useFrame((state, delta) =>
     {
         /**
          * Controls
          */
-        const { forward, backward, leftward, rightward } = getKeys()
+        const { forward, backward, leftward, rightward } = controls
 
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
 
-        const impulseStrength = 0.45 * delta
-        const torqueStrength = 0.1 * delta
+        const impulseStrength = 3.0 * delta
+        const torqueStrength = 0.6 * delta
 
         if(forward)
         {
             impulse.z -= impulseStrength
             torque.x -= torqueStrength
+            controls = {...controls, forward: false}
         }
 
         if(rightward)
         {
             impulse.x += impulseStrength
             torque.z -= torqueStrength
+            controls = {...controls, rightward: false}
+
         }
 
         if(backward)
         {
             impulse.z += impulseStrength
             torque.x += torqueStrength
+            controls = {...controls, backward: false}
+
         }
         
         if(leftward)
         {
             impulse.x -= impulseStrength
             torque.z += torqueStrength
+            controls = {...controls, leftward: false}
+
         }
 
         body.current.applyImpulse(impulse)
@@ -138,20 +154,59 @@ export default function Player(){
         /**
         * Phases
         */
-        if(bodyPosition.z < - (blocksCount * 4 + 2))
-            end()
-
-        if(bodyPosition.y < - 9.5)
-            restart()
+        if(bodyPosition.y < - 9.8)
+            reset()
     });
 
-    // const fox = useGLTF('./Fox/glTF/Fox.gltf');
-    // const animations = useAnimations(fox.animations, fox.scene)
 
-    // useEffect(() => {
-    //     const action = animations.actions.Run;
-    //     // action.play()
-    // }, []);
+
+    const sampleJoystick = {
+        mode: 'static',
+        position: {
+            left: '15%',
+            bottom: '12%'
+        },
+        size: 80,
+        color: '#ffffff',
+        dynamicPage: true,
+        // zone: document.getElementById('zone_joystick'),
+    };
+    const joystick = nipplejs.create(sampleJoystick);
+    let position;
+
+    joystick
+            .on('start end', function (evt, data) { position = data })
+            .on('move', function (evt, data) { position = data })
+            .on('plain:up', function (evt, data) { 
+                controls = {...controls, forward: true}  
+            })
+            .on('plain:down', function (evt, data) { 
+                controls = {...controls, backward: true}  
+            })
+            .on('plain:right', function (evt, data) { 
+                controls = {...controls, rightward: true}  
+            })
+            .on('plain:left', function (evt, data) { 
+                controls = {...controls, leftward: true}  
+            })
+            .on('pressure', function (evt, data) { position = data })
+            .on('added', function (evt, nipple) {
+                nipple.on('start move end dir plain', function (evt) {
+                    // DO EVERYTHING
+                });
+            })
+            .on('removed', function (evt, nipple) {
+                nipple.off('start move end dir plain');
+            });
+
+            useEffect(() => {
+                // Your setup code here. This runs when your component mounts
+            
+                return () => {
+                  // Your cleanup code here. This will be called when your component is unmounted
+                  joystick.destroy()
+                };
+              }, []);
 
     return <RigidBody
         ref={ body }

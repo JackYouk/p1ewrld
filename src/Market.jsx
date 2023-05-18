@@ -5,6 +5,7 @@ import { Gltf } from "@react-three/drei";
 import { useRef } from "react";
 import { AvatarContext } from "./stores/avatarContext";
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 function ItemModel({ glb, scale }) {
@@ -18,6 +19,12 @@ function ItemModel({ glb, scale }) {
 
 export default function Market() {
     const router = useNavigate();
+
+    // useEffect(() => , [])
+    
+    if(document.body.querySelector('#nipple_0_0')){
+        document.body.querySelector('#nipple_0_0').remove()
+    }
 
     const { avatar, setAvatar } = AvatarContext();
 

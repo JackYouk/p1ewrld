@@ -5,12 +5,14 @@ import { KeyboardControls } from '@react-three/drei'
 import Game from './Game'
 import Market from './Market'
 import { AvatarProvider } from './stores/avatarContext'
+import { ControlsProvider } from './stores/controlsContext'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
     <BrowserRouter>
         <AvatarProvider>
+            <ControlsProvider>
             <KeyboardControls
                 map={[
                     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -26,6 +28,7 @@ root.render(
                 </Routes>
                 {/* <Interface /> */}
             </KeyboardControls>
+            </ControlsProvider>
         </AvatarProvider>
     </BrowserRouter>
 )

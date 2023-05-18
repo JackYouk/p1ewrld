@@ -3,9 +3,12 @@ import useGame from '../stores/useGame.jsx'
 import { useEffect, useRef } from 'react'
 import { addEffect } from '@react-three/fiber'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import nipplejs from 'nipplejs';
+import { ControlsContext } from '../stores/controlsContext.jsx'
 
-export default function Interface()
-{
+
+export default function Interface() {
     const navigate = useNavigate();
     const time = useRef()
 
@@ -18,59 +21,102 @@ export default function Interface()
     const rightward = useKeyboardControls((state) => state.rightward)
     const jump = useKeyboardControls((state) => state.jump)
 
-    useEffect(() =>
-    {
-        const unsubscribeEffect = addEffect(() =>
-        {
-            const state = useGame.getState()
+    const [gamesmenuOpen, setGamesmenuOpen] = useState(false);
 
-            let elapsedTime = 0
-
-            if(state.phase === 'playing')
-                elapsedTime = Date.now() - state.startTime
-            else if(state.phase === 'ended')
-                elapsedTime = state.endTime - state.startTime
-
-            elapsedTime /= 1000
-            elapsedTime = elapsedTime.toFixed(2)
-
-            if(time.current)
-                time.current.textContent = elapsedTime
-        })
-
-        return () =>
-        {
-            unsubscribeEffect()
-        }
-    }, [])
+    let loggedIn = false;
 
     return <div className="interface">
 
-        {/* Time */}
-        {/* <div ref={ time } className="time">0.00</div> */}
+        {gamesmenuOpen ? (
+            <>
+            {/* Games Menu */}
+            <div>
 
-        {/* Restart */}
-        { phase === 'ended' && <div className="restart" onClick={ restart }>Restart</div> }
+            </div>
+        <div className='game-menu' onClick={() => setGamesmenuOpen(false)} style={{
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100dvh',
+            backgroundColor: '#00000077',
+        }}>
+            <div style={{
+                display: 'flex',
+                padding: '5px',
+                margin: '10px',
+                flexDirection: `${window.innerWidth < 600 ? 'column' : 'row'}`,
+                overflowY: 'scroll',
+                maxHeight: '75dvh',
+                color: 'white',
+                backgroundColor: '#ffffff50'
+            }} onClick={(e) => { 
+                e.stopPropagation()
+            }}>
+                <div 
+                    className="game-item" 
+                    style={{background: `url("https://1.bp.blogspot.com/-GCtvzUJK9cI/X6D539t0tQI/AAAAAAAABiU/XLXZCucHXxMfbDu2ChhsyBelPZAr-HeQgCLcBGAsYHQ/w1200-h630-p-k-no-nu/how-to-play-minecraft-at-school-with-vpn.jpg")`}} 
+                    onClick={(e) => {}}
+                >
+                    {loggedIn ? (
+                        <>
+                            <div style={{}}>
+                                My P1E World
+                            </div>
+                            {/* <div style={{ fontSize: '18px' }}>
+                                    <span style={{ color: 'green' }}>Common</span> - Default
+                                </div> */}
+                        </>
+                    ) : (
+                        <>
+                            <div style={{}}>
+                                Login To Create A World
+                            </div>
+                            {/* <div style={{ fontSize: '18px' }}>
+                                    <span style={{ color: 'green' }}>Common</span> - Default
+                                </div> */}
+                        </>
+                    )}
+                </div>
+                <div 
+                    className="game-item" 
+                    style={{background: `url("https://www.timeslifestyle.net/wp-content/uploads/2021/07/CS-GO.jpg")`}} 
+                    onClick={(e) => {}}
+                >
+                    <div style={{}}>
+                        Rare P1E
+                    </div>
+                    <div style={{ fontSize: '18px' }}>
+                        Built By JackJack
+                    </div>
+                </div>
+            </div>
+        </div>
+            </>
+        ) : (
+            <></>
+        )}
+        
 
-        {/* Controls */}
         <div className="controls">
-            
-            {/* <div className="raw">
-                <div className={ `key ${ forward ? 'active' : '' }` }></div>
+
+            {/* Drag Controls */}
+            {/* <div id="zone_joystick" /> */}
+            {/* Nav Btns */}
+            <div className='raw' onClick={() => {
+                // joystick.destroy()
+                setGamesmenuOpen(true)
+            }}>
+                <div className='games-btn'>Mini Games</div>
             </div>
-            <div className="raw">
-                <div className={ `key ${ leftward ? 'active' : '' }` }></div>
-                <div className={ `key ${ backward ? 'active' : '' }` }></div>
-                <div className={ `key ${ rightward ? 'active' : '' }` }></div>
-            </div>
-            <div className="raw">
-                <div className={ `key large ${ jump ? 'active' : '' }` }></div>
-            </div> */}
-            <div className='raw' onClick={() => navigate('/market')}>
-                <div className='market'>Market</div>
+            <div className='raw' onClick={() => {
+                navigate('/market')
+                // joystick.destroy()
+            }}>
+                <div className='market-btn'>Market</div>
             </div>
 
         </div>
-        
+
     </div>
 }
