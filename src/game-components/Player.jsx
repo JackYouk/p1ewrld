@@ -95,7 +95,9 @@ export default function Player() {
         const cameraPosition = new THREE.Vector3()
         cameraPosition.copy(bodyPosition)
         cameraPosition.z += 2.25
-        cameraPosition.y += 0.65
+        cameraPosition.y += 0.65 // close up
+        // cameraPosition.y += 3.5 // zoom out
+        // cameraPosition.y += 50 // super far out
 
         const cameraTarget = new THREE.Vector3()
         cameraTarget.copy(bodyPosition)
