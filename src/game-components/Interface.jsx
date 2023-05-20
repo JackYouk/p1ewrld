@@ -91,24 +91,40 @@ export default function Interface() {
                         <div className='moveControls'>
                             `<div style={{ display: 'flex' }}>
                                 <div className='center'></div>
-                                <div className='moveBtn forward' onClick={() => setControls({...controls, forward: true})}>F</div>
+                                <div className='moveBtn forward' onClick={() => setControls({ ...controls, forward: true })}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-caret-up" viewBox="0 0 16 16">
+                                        <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                    </svg>
+                                </div>
                                 <div className='center'></div>
                             </div>
 
                             <div style={{ display: 'flex' }}>
-                                <div className='moveBtn leftward' onClick={() => setControls({...controls, leftward: true})}>L</div>
+                                <div className='moveBtn leftward' onClick={() => setControls({ ...controls, leftward: true })}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-caret-left" viewBox="0 0 16 16">
+                                        <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
+                                    </svg>
+                                </div>
                                 <div className='center'></div>
-                                <div className='moveBtn rightward' onClick={() => setControls({...controls, rightward: true})}>R</div>
+                                <div className='moveBtn rightward' onClick={() => setControls({ ...controls, rightward: true })}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-caret-right" viewBox="0 0 16 16">
+                                        <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+                                    </svg>
+                                </div>
                             </div>
 
                             <div style={{ display: 'flex' }}>
                                 <div className='center'></div>
-                                <div className='moveBtn backward' onClick={() => setControls({...controls, backward: true})}>B</div>
+                                <div className='moveBtn backward' onClick={() => setControls({ ...controls, backward: true })}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-caret-down" viewBox="0 0 16 16">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </div>
                                 <div className='center'></div>
                             </div>
                         </div>
 
-                        <div className='jumpBtn' onClick={() => setControls({...controls, jump: true})}>Jump</div>
+                        <div className='jumpBtn' onClick={() => setControls({ ...controls, jump: true })}>Jump</div>
                     </div>
 
                     {/* Nav Btns */}
