@@ -4,6 +4,7 @@ const Context = createContext();
 
 export const ControlsProvider = ({ children }) => {
     
+    const [cameraZoom, setCameraZoom] = useState(0.65);
 
     const [controls, setControls] = useState(
         {
@@ -18,6 +19,8 @@ export const ControlsProvider = ({ children }) => {
     const value = {
         controls,
         setControls,
+        cameraZoom,
+        setCameraZoom,
     }
 
     return (

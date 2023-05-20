@@ -9,10 +9,12 @@ import * as THREE from 'three'
 
 // Context/State
 import { AvatarContext } from '../stores/avatarContext.jsx'
+import { ControlsContext } from '../stores/controlsContext.jsx'
 
 
 export default function Player() {
     const { avatar, setAvatar } = AvatarContext();
+    const {cameraZoom, setCameraZoom} = ControlsContext();
     const body = useRef()
     const { rapier, world } = useRapier()
     const rapierWorld = world.raw()
@@ -95,7 +97,7 @@ export default function Player() {
         const cameraPosition = new THREE.Vector3()
         cameraPosition.copy(bodyPosition)
         cameraPosition.z += 2.25
-        cameraPosition.y += 0.65 // close up
+        cameraPosition.y += cameraZoom // close up
         // cameraPosition.y += 3.5 // zoom out
         // cameraPosition.y += 50 // super far out
 
