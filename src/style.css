@@ -10,6 +10,9 @@ body,
     font-family: 'Bebas Neue', cursive;
 }
 
+/* .dragControls{
+    z-index: 0;
+} */
 
 
 /* Market ================================ */
@@ -158,23 +161,25 @@ body,
  */
 .controls {
     position: absolute;
-    bottom: 1%;
-    right: 2%;
+    bottom: 0;
+    width: 100%;
 }
 
 .controls .raw {
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
-.controls .market-btn {
-    width: 144px;
+.market-btn {
+    border-radius: 3px;
+    width: 110px;
     height: 40px;
     margin: 4px;
     border: 2px solid #ffffff;
     color: #ffffff;
     background: #ffffff44;
-    font-size: xx-large;
+    font-size: large;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -182,24 +187,19 @@ body,
 }
 
 .market-btn:hover {
-    width: 144px;
-    height: 40px;
-    margin: 4px;
-    border: 2px solid #ffffff;
     background: #ffffff99;
-    font-size: xx-large;
-    text-align: center;
     cursor: pointer;
 }
 
-.controls .games-btn {
-    width: 144px;
+.games-btn {
+    border-radius: 3px;
+    width: 110px;
     height: 40px;
     margin: 4px;
     border: 2px solid #ffffff;
     color: #ffffff;
     background: #ffffff44;
-    font-size: xx-large;
+    font-size: large;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -207,12 +207,68 @@ body,
 }
 
 .games-btn:hover {
-    width: 144px;
-    height: 40px;
-    margin: 4px;
-    border: 2px solid #ffffff;
     background: #ffffff99;
-    font-size: xx-large;
-    text-align: center;
     cursor: pointer;
 }
+
+.avatarControls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: end;
+}
+
+.moveControls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+ 
+.moveBtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background: #ffffff44;
+    font-size: small;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.jumpBtn {
+    border-radius: 3px;
+    margin: 5px;
+    width: 83px;
+    height: 83px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background: #ffffff44;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    .center {
+    background: #ffffff60;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    margin: 0px;
+    border: 2px solid #ffffff80;
+    color: #ffffff;
+    font-size: small;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

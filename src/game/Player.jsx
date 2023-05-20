@@ -1,12 +1,64 @@
 import { useRapier, RigidBody } from '@react-three/rapier'
 import { useFrame } from '@react-three/fiber'
-import { useKeyboardControls, useAnimations, useGLTF, Gltf } from '@react-three/drei'
+import { useKeyboardControls, useAnimations, useGLTF, Gltf, Html } from '@react-three/drei'
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import useGame from '../stores/useGame.jsx'
 import { AvatarContext } from '../stores/avatarContext.jsx'
 import nipplejs from 'nipplejs';
 
+// function DraggableComponent() {
+//     const [dragStart, setDragStart] = useState(null);
+//     const [dragStartTime, setDragStartTime] = useState(null);
+
+//     const handleTouchStart = (event) => {
+//         setDragStart({
+//             x: event.touches[0].clientX,
+//             y: event.touches[0].clientY,
+//         });
+//         setDragStartTime(Date.now());
+//     };
+
+//     const handleTouchMove = (event) => {
+//         if (!dragStart) return;
+
+//         const currentPosition = {
+//             x: event.touches[0].clientX,
+//             y: event.touches[0].clientY,
+//         };
+
+//         const direction = {
+//             x: currentPosition.x - dragStart.x,
+//             y: currentPosition.y - dragStart.y,
+//         };
+
+//         console.log('Drag direction:', direction);
+//     };
+
+//     const handleTouchEnd = () => {
+//         if (dragStartTime) {
+//             const dragTimeLength = Date.now() - dragStartTime;
+//             console.log('Drag time length (ms):', dragTimeLength);
+//         }
+
+//         setDragStart(null);
+//         setDragStartTime(null);
+//     };
+
+//     return (
+//         <div
+//             onTouchStart={handleTouchStart}
+//             onTouchMove={handleTouchMove}
+//             onTouchEnd={handleTouchEnd}
+//             onTouchCancel={handleTouchEnd}
+//             onClick={() => console.log('hit')}
+//             className='dragControls'
+//             style={{ position: "absolute", width: '1000px', height: '1000px', backgroundColor: 'black' }}
+//         >
+// hello world
+//         </div>
+//     );
+// }
 
 export default function Player(){
     const {avatar, setAvatar} = AvatarContext();
@@ -94,8 +146,8 @@ export default function Player(){
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
 
-        const impulseStrength = 3.0 * delta
-        const torqueStrength = 0.6 * delta
+        const impulseStrength = 0.6 * delta
+        const torqueStrength = 0.2 * delta
 
         if(forward)
         {
@@ -172,6 +224,7 @@ export default function Player(){
         // zone: document.getElementById('zone_joystick'),
     };
     const joystick = nipplejs.create(sampleJoystick);
+    joystick.destroy()
     let position;
 
     joystick
@@ -179,15 +232,22 @@ export default function Player(){
             .on('move', function (evt, data) { position = data })
             .on('plain:up', function (evt, data) { 
                 controls = {...controls, forward: true}  
+                console.log(data)
+
             })
             .on('plain:down', function (evt, data) { 
-                controls = {...controls, backward: true}  
+                controls = {...controls, backward: true} 
+                console.log(data)
+ 
             })
             .on('plain:right', function (evt, data) { 
                 controls = {...controls, rightward: true}  
+                console.log(data)
+
             })
             .on('plain:left', function (evt, data) { 
                 controls = {...controls, leftward: true}  
+                console.log(data)
             })
             .on('pressure', function (evt, data) { position = data })
             .on('added', function (evt, nipple) {
@@ -208,7 +268,9 @@ export default function Player(){
                 };
               }, []);
 
-    return <RigidBody
+    return (
+        <>
+    <RigidBody
         ref={ body }
         colliders="hull"
         restitution={ 0.2 }
@@ -224,4 +286,6 @@ export default function Player(){
         {/* <primitive object={fox.scene} scale={0.005} /> */}
         <Gltf src={avatar.glb} scale={avatar.gameScale} castShadow/>
     </RigidBody>
+    </>
+    )
 }

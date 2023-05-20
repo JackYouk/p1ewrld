@@ -2,11 +2,54 @@ import { Environment, Float } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useNavigate } from "react-router-dom";
 import { Gltf } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AvatarContext } from "./stores/avatarContext";
 import { AuthContext } from './stores/authContext';
-import { useState } from "react";
-import { useEffect } from "react";
+
+
+
+// function DraggableComponent() {
+//   const [dragStart, setDragStart] = useState(null);
+
+//   const handleTouchStart = (event) => {
+//     setDragStart({
+//       x: event.touches[0].clientX,
+//       y: event.touches[0].clientY,
+//     });
+//   };
+
+//   const handleTouchMove = (event) => {
+//     if (!dragStart) return;
+
+//     const currentPosition = {
+//       x: event.touches[0].clientX,
+//       y: event.touches[0].clientY,
+//     };
+
+//     const direction = {
+//       x: currentPosition.x - dragStart.x,
+//       y: currentPosition.y - dragStart.y,
+//     };
+
+//     console.log('Drag direction:', direction);
+//   };
+
+//   const handleTouchEnd = () => {
+//     setDragStart(null);
+//   };
+
+//   return (
+//     <div
+//       onTouchStart={handleTouchStart}
+//       onTouchMove={handleTouchMove}
+//       onTouchEnd={handleTouchEnd}
+//       onTouchCancel={handleTouchEnd}
+//       style={{position: "absolute", width: '100dvw', height: '100dvh'}}
+//     >
+      
+//     </div>
+//   );
+// }
 
 
 function ItemModel({ glb, scale }) {
@@ -51,10 +94,10 @@ export default function Market() {
 
     return (
         <div style={{ backgroundColor: 'gray', width: '100%', height: '100dvh', position: 'absolute', color: 'white' }}>
-
+            {/* <DraggableComponent /> */}
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div className="btn" onClick={() => router('/')}>back to game</div>
-                <div className="btn-gold" onClick={() => setPage('Bank')}>{`${'0'}𝜋`}</div>
+                {currentUser ? <div className="btn-gold" onClick={() => setPage('Bank')}>{`${currentUser.totalPi}𝜋`}</div> : <></>}
             </div>
             <div style={{ textAlign: 'center', fontSize: '50px' }}>{page}</div>
 
