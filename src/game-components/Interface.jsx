@@ -123,7 +123,7 @@ export default function Interface() {
 
                     {/* Nav Btns */}
                     <div className='raw' >
-                        <div className='games-btn' onClick={() => { setGamesmenuOpen(true) }}>Mini Games</div>
+                        <div className='games-btn' onClick={() => { setGamesmenuOpen(true) }}>Games</div>
 
                         <div className='market-btn' onClick={() => { navigate('/market') }}>Market</div>
                     </div>
