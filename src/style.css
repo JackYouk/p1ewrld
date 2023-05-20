@@ -23,6 +23,7 @@ body,
     border: 2px solid #ffffff;
     background: #ffffff44;
     font-size: x-large;
+    border-radius: 3px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -38,6 +39,7 @@ body,
     width: 120px;
     height: 30px;
     margin: 10px;
+    border-radius: 3px;
     border: 2px solid #ffffff;
     background: #e8e24944;
     font-size: x-large;
@@ -60,6 +62,7 @@ body,
 .active-item {
     padding: 3px;
     margin: 5px;
+    border-radius: 3px;
     border: 2px solid #ffffff;
     background: #d349e344;
     font-size: x-large;
@@ -72,6 +75,7 @@ body,
 
 .market-item {
     padding: 3px;
+    border-radius: 3px;
     margin: 5px;
     border: 2px solid #ffffff;
     background: #ffffff44;
@@ -88,25 +92,7 @@ body,
     cursor: pointer;
 }
 
-.game-item {
-    padding: 3px;
-    margin: 5px;
-    border: 2px solid #ffffff;
-    background-size: cover;
-    filter: grayscale();
-    font-size: x-large;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-}
 
-.game-item:hover {
-    cursor: pointer;
-    filter: none;
-}
 
 
 
@@ -174,8 +160,8 @@ body,
 .market-btn {
     border-radius: 3px;
     width: 110px;
-    height: 40px;
-    margin: 4px;
+    height: 36px;
+    margin: 5px;
     border: 2px solid #ffffff;
     color: #ffffff;
     background: #ffffff44;
@@ -194,8 +180,8 @@ body,
 .games-btn {
     border-radius: 3px;
     width: 110px;
-    height: 40px;
-    margin: 4px;
+    height: 36px;
+    margin: 5px;
     border: 2px solid #ffffff;
     color: #ffffff;
     background: #ffffff44;
@@ -208,6 +194,26 @@ body,
 
 .games-btn:hover {
     background: #ffffff99;
+    cursor: pointer;
+}
+
+.game-item {
+    padding: 3px;
+    border-radius: 3px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    background-size: cover;
+    filter: grayscale();
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.game-item:hover {
     cursor: pointer;
 }
 

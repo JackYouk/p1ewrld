@@ -1,30 +1,24 @@
-import { useKeyboardControls } from '@react-three/drei'
-import useGame from '../stores/useGame.jsx'
+import useGame from './stores/useGame.jsx.js'
 import { useEffect, useRef } from 'react'
 import { addEffect } from '@react-three/fiber'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import nipplejs from 'nipplejs';
-import { ControlsContext } from '../stores/controlsContext.jsx'
-import { AuthContext } from '../stores/authContext.jsx'
+import { ControlsContext } from './stores/controlsContext.jsx.js'
+import { AuthContext } from './stores/authContext.jsx.js'
 
 
 
 export default function Interface() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { currentUser, login } = AuthContext();
     const time = useRef()
 
     const restart = useGame((state) => state.restart)
     const phase = useGame((state) => state.phase)
 
-    const forward = useKeyboardControls((state) => state.forward)
-    const backward = useKeyboardControls((state) => state.backward)
-    const leftward = useKeyboardControls((state) => state.leftward)
-    const rightward = useKeyboardControls((state) => state.rightward)
-    const jump = useKeyboardControls((state) => state.jump)
-
     const [gamesmenuOpen, setGamesmenuOpen] = useState(false);
+    const [selectedGame, setSelectedGame] = useState({game: 'My P1E World', slug: '/'});
 
 
     return (
@@ -49,6 +43,7 @@ export default function Interface() {
                                 display: 'flex',
                                 padding: '5px',
                                 margin: '10px',
+                                borderRadius: '3px',
                                 flexDirection: `column`,
                                 overflowY: 'scroll',
                                 maxHeight: '75dvh',
@@ -59,15 +54,18 @@ export default function Interface() {
                             }}>
                                 <div
                                     className="game-item"
-                                    style={{ background: `url("https://1.bp.blogspot.com/-GCtvzUJK9cI/X6D539t0tQI/AAAAAAAABiU/XLXZCucHXxMfbDu2ChhsyBelPZAr-HeQgCLcBGAsYHQ/w1200-h630-p-k-no-nu/how-to-play-minecraft-at-school-with-vpn.jpg")` }}
-                                    onClick={() => !currentUser ? login() : navigate('/')}
+                                    style={{
+                                        filter: `${selectedGame.game === 'My P1E World' ? 'none' : ''}`, 
+                                        background: `url("https://1.bp.blogspot.com/-GCtvzUJK9cI/X6D539t0tQI/AAAAAAAABiU/XLXZCucHXxMfbDu2ChhsyBelPZAr-HeQgCLcBGAsYHQ/w1200-h630-p-k-no-nu/how-to-play-minecraft-at-school-with-vpn.jpg")` 
+                                    }}
+                                    onClick={() => !currentUser ? login() : setSelectedGame({game: 'My P1E World', slug: '/'})}
                                 >
                                     {currentUser ? (
                                         <>
                                             <div style={{}}>
                                                 My P1E World
                                             </div>
-                                            <div style={{ fontSize: '18px' }}>
+                                            <div style={{ fontSize: '15px' }}>
 
                                             </div>
                                         </>
@@ -76,7 +74,7 @@ export default function Interface() {
                                             <div style={{}}>
                                                 Login To Customize Your Own World
                                             </div>
-                                            <div style={{ fontSize: '18px' }}>
+                                            <div style={{ fontSize: '15px' }}>
                                                 Click to Login
                                             </div>
                                         </>
@@ -84,15 +82,22 @@ export default function Interface() {
                                 </div>
                                 <div
                                     className="game-item"
-                                    style={{ background: `url("https://www.timeslifestyle.net/wp-content/uploads/2021/07/CS-GO.jpg")` }}
-                                    onClick={(e) => { }}
+                                    style={{
+                                        filter: `${selectedGame.game === 'P1E Stacker' ? 'none' : ''}`, 
+                                        background: `url("https://www.timeslifestyle.net/wp-content/uploads/2021/07/CS-GO.jpg")` 
+                                    }}
+                                    onClick={(e) => { setSelectedGame({game: 'P1E Stacker', slug: '/p1e-stacker'}) }}
                                 >
                                     <div style={{}}>
-                                        Rare P1E
+                                        P1E Stacker
                                     </div>
-                                    <div style={{ fontSize: '18px' }}>
+                                    <div style={{ fontSize: '15px' }}>
                                         Built By JackJack
                                     </div>
+                                </div>
+                                <div style={{display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
+                                    <div style={{fontSize: 'xx-large', marginRight: '10px'}}>{selectedGame.game}</div>
+                                    <div className='market-btn' onClick={() => navigate(selectedGame.slug)}>Go</div>
                                 </div>
                             </div>
                         </div>
@@ -130,18 +135,11 @@ export default function Interface() {
                         <div className='jumpBtn'>Jump</div>
 
                     </div>
-                    {/* <div id="zone_joystick" /> */}
                     {/* Nav Btns */}
                     <div className='raw' >
-                        <div className='games-btn' onClick={() => {
-                            // joystick.destroy()
-                            setGamesmenuOpen(true)
-                        }}>Mini Games</div>
+                        <div className='games-btn' onClick={() => { setGamesmenuOpen(true) }}>Mini Games</div>
 
-                        <div className='market-btn' onClick={() => {
-                            navigate('/market')
-                            // joystick.destroy()
-                        }}>Market</div>
+                        <div className='market-btn' onClick={() => { navigate('/market') }}>Market</div>
                     </div>
 
                 </div>

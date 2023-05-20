@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const Context = createContext();
 
 export const AuthProvider = ({ children }) => {
-    
 
     const [currentUser, setCurrentUser] = useState(null);
 
@@ -15,6 +14,7 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+    // login with pi network and check users table of firebase auth
     const login = () => {
         setCurrentUser(user);
     }
