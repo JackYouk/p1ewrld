@@ -14,7 +14,7 @@ import { ControlsContext } from '../stores/controlsContext.jsx'
 
 export default function Player() {
     const { avatar, setAvatar } = AvatarContext();
-    const {cameraZoom, setCameraZoom} = ControlsContext();
+    const {cameraZoom, setCameraZoom, controls, setControls} = ControlsContext();
     const body = useRef()
     const { rapier, world } = useRapier()
     const rapierWorld = world.raw()
@@ -40,13 +40,6 @@ export default function Player() {
     }
 
 
-    let controls = {
-        forward: false,
-        backward: false,
-        leftward: false,
-        rightward: false
-    }
-
     useFrame((state, delta) => {
         /**
          * Controls
@@ -56,38 +49,41 @@ export default function Player() {
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
 
-        const impulseStrength = 0.6 * delta
-        const torqueStrength = 0.2 * delta
+        const impulseStrength = 5 * delta
+        // const torqueStrength = 2 * delta
 
         if (forward) {
             impulse.z -= impulseStrength
-            torque.x -= torqueStrength
-            controls = { ...controls, forward: false }
+            // torque.x -= torqueStrength
+            setControls({ ...controls, forward: false })
         }
 
         if (rightward) {
             impulse.x += impulseStrength
-            torque.z -= torqueStrength
-            controls = { ...controls, rightward: false }
+            // torque.z -= torqueStrength
+            setControls({ ...controls, rightward: false })
 
         }
 
         if (backward) {
             impulse.z += impulseStrength
-            torque.x += torqueStrength
-            controls = { ...controls, backward: false }
-
+            // torque.x += torqueStrength
+            setControls({ ...controls, backward: false })
         }
 
         if (leftward) {
             impulse.x -= impulseStrength
-            torque.z += torqueStrength
-            controls = { ...controls, leftward: false }
+            // torque.z += torqueStrength
+            setControls({ ...controls, leftward: false })
+        }
 
+        if(controls.jump){
+            jump()
+            setControls({ ...controls, jump: false })
         }
 
         body.current.applyImpulse(impulse)
-        body.current.applyTorqueImpulse(torque)
+        // body.current.applyTorqueImpulse(torque)
 
         /**
          * Camera

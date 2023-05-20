@@ -11,7 +11,7 @@ export default function Interface() {
     const navigate = useNavigate();
     const location = useLocation();
     const { currentUser, login } = AuthContext();
-    const { cameraZoom, setCameraZoom } = ControlsContext();
+    const { cameraZoom, setCameraZoom, controls, setControls } = ControlsContext();
     const [gamesmenuOpen, setGamesmenuOpen] = useState(false);
     const [selectedGame, setSelectedGame] = useState({ game: 'My P1E World', slug: '/' });
 
@@ -91,24 +91,24 @@ export default function Interface() {
                         <div className='moveControls'>
                             `<div style={{ display: 'flex' }}>
                                 <div className='center'></div>
-                                <div className='moveBtn forward'>F</div>
+                                <div className='moveBtn forward' onClick={() => setControls({...controls, forward: true})}>F</div>
                                 <div className='center'></div>
                             </div>
 
                             <div style={{ display: 'flex' }}>
-                                <div className='moveBtn leftward'>L</div>
+                                <div className='moveBtn leftward' onClick={() => setControls({...controls, leftward: true})}>L</div>
                                 <div className='center'></div>
-                                <div className='moveBtn rightward'>R</div>
+                                <div className='moveBtn rightward' onClick={() => setControls({...controls, rightward: true})}>R</div>
                             </div>
 
                             <div style={{ display: 'flex' }}>
                                 <div className='center'></div>
-                                <div className='moveBtn backward'>B</div>
+                                <div className='moveBtn backward' onClick={() => setControls({...controls, backward: true})}>B</div>
                                 <div className='center'></div>
                             </div>
                         </div>
 
-                        <div className='jumpBtn'>Jump</div>
+                        <div className='jumpBtn' onClick={() => setControls({...controls, jump: true})}>Jump</div>
                     </div>
 
                     {/* Nav Btns */}
