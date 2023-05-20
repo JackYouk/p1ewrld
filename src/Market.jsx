@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Gltf } from "@react-three/drei";
 import { useRef } from "react";
 import { AvatarContext } from "./stores/avatarContext";
+import { AuthContext } from './stores/authContext';
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -19,6 +20,7 @@ function ItemModel({ glb, scale }) {
 
 export default function Market() {
     const router = useNavigate();
+    const {currentUser, login, logout} = AuthContext();
 
     // useEffect(() => , [])
     
@@ -28,7 +30,13 @@ export default function Market() {
 
     const { avatar, setAvatar } = AvatarContext();
 
-    const [page, setPage] = useState('Login')
+    const [page, setPage] = useState('Login');
+
+    useEffect(() => {
+        if(currentUser){
+            setPage('Market');
+        }
+    }, [currentUser]);
 
     const buyAvatar = () => {
         return;
@@ -61,7 +69,7 @@ export default function Market() {
             {page === 'Login' ? (
                 <>
                     <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div className="btn" onClick={() => setPage('Market')}>Login</div>
+                        <div className="btn" onClick={() => login()}>Login</div>
                     </div>
                 </>
             ) : <></>}

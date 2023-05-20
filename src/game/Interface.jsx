@@ -6,10 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import nipplejs from 'nipplejs';
 import { ControlsContext } from '../stores/controlsContext.jsx'
+import { AuthContext } from '../stores/authContext.jsx'
 
 
 export default function Interface() {
     const navigate = useNavigate();
+    const {currentUser, login} = AuthContext();
     const time = useRef()
 
     const restart = useGame((state) => state.restart)
@@ -23,7 +25,6 @@ export default function Interface() {
 
     const [gamesmenuOpen, setGamesmenuOpen] = useState(false);
 
-    let loggedIn = false;
 
     return <div className="interface">
 
@@ -56,25 +57,25 @@ export default function Interface() {
                 <div 
                     className="game-item" 
                     style={{background: `url("https://1.bp.blogspot.com/-GCtvzUJK9cI/X6D539t0tQI/AAAAAAAABiU/XLXZCucHXxMfbDu2ChhsyBelPZAr-HeQgCLcBGAsYHQ/w1200-h630-p-k-no-nu/how-to-play-minecraft-at-school-with-vpn.jpg")`}} 
-                    onClick={(e) => {}}
+                    onClick={() => !currentUser ? login() : navigate('/')}
                 >
-                    {loggedIn ? (
+                    {currentUser ? (
                         <>
                             <div style={{}}>
                                 My P1E World
                             </div>
-                            {/* <div style={{ fontSize: '18px' }}>
-                                    <span style={{ color: 'green' }}>Common</span> - Default
-                                </div> */}
+                            <div style={{ fontSize: '18px' }}>
+                                    
+                            </div>
                         </>
                     ) : (
                         <>
                             <div style={{}}>
-                                Login To Create A World
+                                Login To Customize Your Own World
                             </div>
-                            {/* <div style={{ fontSize: '18px' }}>
-                                    <span style={{ color: 'green' }}>Common</span> - Default
-                                </div> */}
+                            <div style={{ fontSize: '18px' }}>
+                                    Click to Login
+                            </div>
                         </>
                     )}
                 </div>
