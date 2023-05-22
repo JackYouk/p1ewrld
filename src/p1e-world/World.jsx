@@ -22,6 +22,7 @@ import Mansion from './world-assets/buildings/Mansion';
 import Pub from './world-assets/buildings/Pub';
 import WaterWheel from './world-assets/buildings/WaterWheel';
 import Windmill from './world-assets/buildings/Windmill';
+import { PlayerContext } from '../context/playerContext';
 
 
 export default function World() {
@@ -33,6 +34,10 @@ export default function World() {
         source: https://sketchfab.com/3d-models/free-low-poly-game-assets-bbbfbeccfc9047b8b3f15b1c90061cdf
         title: (FREE) Low Poly Game Assets
     */
+
+    const {activeBuildings, setActiveBuilding} = PlayerContext();
+    const { banks, blacksmith, cannon, crossbows, houses, mansion, pub, waterwheel, windmill, } = activeBuildings;
+
     const { nodes, materials, animations } = useGLTF("/lowpoly_world.glb");
 
     return (
@@ -49,15 +54,15 @@ export default function World() {
                     <FloatingName scale={0.5} position={[0.02, 5, 0]} />
 
                     {/* Buildings */}
-                    <Banks nodes={nodes} materials={materials} />
-                    <Blacksmith nodes={nodes} materials={materials} />
-                    <Cannon nodes={nodes} materials={materials} />
-                    <Crossbows nodes={nodes} materials={materials} />
-                    <Houses nodes={nodes} materials={materials} />
-                    <Mansion nodes={nodes} materials={materials} />
-                    <Pub nodes={nodes} materials={materials} />
-                    <WaterWheel nodes={nodes} materials={materials} />
-                    <Windmill nodes={nodes} materials={materials} />
+                    {banks ? <Banks nodes={nodes} materials={materials} /> : <></>}
+                    {blacksmith ? <Blacksmith nodes={nodes} materials={materials} /> : <></>}
+                    {cannon ? <Cannon nodes={nodes} materials={materials} /> : <></>}
+                    {crossbows ? <Crossbows nodes={nodes} materials={materials} /> : <></>}
+                    {houses ? <Houses nodes={nodes} materials={materials} /> : <></>}
+                    {mansion ? <Mansion nodes={nodes} materials={materials} /> : <></>}
+                    {pub ? <Pub nodes={nodes} materials={materials} /> : <></>}
+                    {waterwheel ? <WaterWheel nodes={nodes} materials={materials} /> : <></>}
+                    {windmill ? <Windmill nodes={nodes} materials={materials} /> : <></>}
 
                 </group>
             </RigidBody>

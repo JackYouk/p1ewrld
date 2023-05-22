@@ -8,12 +8,12 @@ import { Gltf } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Context/State
-import { AvatarContext } from '../stores/avatarContext.jsx'
-import { ControlsContext } from '../stores/controlsContext.jsx'
+import { PlayerContext } from '../context/playerContext.jsx'
+import { ControlsContext } from '../context/controlsContext.jsx'
 
 
 export default function Player() {
-    const { avatar, setAvatar } = AvatarContext();
+    const { avatar, setAvatar } = PlayerContext();
     const {cameraZoom, setCameraZoom, controls, setControls} = ControlsContext();
     const body = useRef()
     const { rapier, world } = useRapier()
@@ -49,7 +49,7 @@ export default function Player() {
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
 
-        const impulseStrength = 5 * delta
+        const impulseStrength = 4.5 * delta
         // const torqueStrength = 2 * delta
 
         if (forward) {

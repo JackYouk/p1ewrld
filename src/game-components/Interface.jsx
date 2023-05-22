@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // Context/State
-import { ControlsContext } from '../stores/controlsContext.jsx'
-import { AuthContext } from '../stores/authContext.jsx'
+import { ControlsContext } from '../context/controlsContext.jsx'
+import { PlayerContext } from '../context/playerContext.jsx'
 
 
 export default function Interface() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { currentUser, login } = AuthContext();
+    const { currentUser, login } = PlayerContext();
     const { cameraZoom, setCameraZoom, controls, setControls } = ControlsContext();
     const [gamesmenuOpen, setGamesmenuOpen] = useState(false);
     const [selectedGame, setSelectedGame] = useState({ game: 'My P1E World', slug: '/' });
@@ -34,15 +34,23 @@ export default function Interface() {
                                 display: 'flex',
                                 padding: '5px',
                                 margin: '10px',
+                                marginTop: '60px',
                                 borderRadius: '3px',
                                 flexDirection: `column`,
                                 overflowY: 'scroll',
-                                maxHeight: '75dvh',
+                                maxHeight: '300px',
                                 color: 'white',
                                 backgroundColor: '#ffffff50'
                             }} onClick={(e) => {
                                 e.stopPropagation()
                             }}>
+                                <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
+                                    <div style={{ fontSize: 'xx-large', marginRight: '10px' }}>{selectedGame.game}</div>
+                                    <div className='market-btn' onClick={() => {
+                                        setGamesmenuOpen(false);
+                                        navigate(selectedGame.slug);
+                                    }}>Go</div>
+                                </div>
                                 <div
                                     className="game-item"
                                     style={{
@@ -72,14 +80,7 @@ export default function Interface() {
                                     <div style={{ fontSize: '15px' }}>
                                         Built By JackJack
                                     </div>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
-                                    <div style={{ fontSize: 'xx-large', marginRight: '10px' }}>{selectedGame.game}</div>
-                                    <div className='market-btn' onClick={() => {
-                                        setGamesmenuOpen(false);
-                                        navigate(selectedGame.slug);
-                                    }}>Go</div>
-                                </div>
+                                </div>     
                             </div>
                         </div>
                     </>

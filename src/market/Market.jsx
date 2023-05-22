@@ -3,20 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // Context/State
-import { AuthContext } from '../stores/authContext';
+import { PlayerContext } from '../context/playerContext';
 
 // Components
 import ItemModel from "./ItemModel";
 
 // Market Pages
 import MyCollection from "./MyCollection";
-import Bank from "./Bank";
-import Auction from "./Auction";
-import Casino from "./Casino";
 
 export default function Market() {
     const navigate = useNavigate();
-    const { currentUser, login, logout } = AuthContext();
+    const { currentUser, login, logout } = PlayerContext();
 
     if (document.body.querySelector('#nipple_0_0')) {
         document.body.querySelector('#nipple_0_0').remove()
@@ -47,9 +44,6 @@ export default function Market() {
 
             {page === 'Login' ? <></> : <div className="market-nav">
                 <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Market' ? 'underline' : 'none'}` }} onClick={() => setPage('Market')}>Market</div>
-                {/* <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Casino' ? 'underline' : 'none'}` }} onClick={() => setPage('Casino')}>Casino</div>
-                <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Auction' ? 'underline' : 'none'}` }} onClick={() => setPage('Auction')}>Auction</div>
-                <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Bank' ? 'underline' : 'none'}` }} onClick={() => setPage('Bank')}>Bank</div> */}
                 <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'My Collection' ? 'underline' : 'none'}` }} onClick={() => setPage('My Collection')}>My Collection</div>
             </div>}
 
@@ -85,18 +79,6 @@ export default function Market() {
                     </div>
                 </>
             ) : <></>}
-
-            {/* {page === 'Casino' ? (
-                <Casino />
-            ) : <></>}
-
-            {page === 'Auction' ? (
-                <Auction />
-            ) : <></>}
-
-            {page === 'Bank' ? (
-                <Bank />
-            ) : <></>} */}
 
             {page === 'My Collection' ? (
                 <MyCollection />

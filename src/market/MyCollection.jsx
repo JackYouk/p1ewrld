@@ -3,16 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // Context/State
-import { AvatarContext } from "../stores/avatarContext";
-import { AuthContext } from '../stores/authContext';
+import { PlayerContext } from '../context/playerContext';
 
 // Components
 import ItemModel from "./ItemModel";
 
 export default function MyCollection() {
     const navigate = useNavigate();
-    const { currentUser, login, logout } = AuthContext();
-    const { avatar, setAvatar } = AvatarContext();
+    const { currentUser, login, logout, avatar, setAvatar } = PlayerContext();
 
     const myCollection = [
         {
