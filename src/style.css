@@ -145,15 +145,10 @@ body,
 /**
  * Controls
  */
-.controls {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
 
 .controls .raw {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
 }
 
@@ -219,14 +214,15 @@ body,
 
 .avatarControls {
     position: absolute;
-    right: 0;
     bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+    width: 100%;
 }
 
+
 .moveControls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
