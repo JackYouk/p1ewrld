@@ -47,6 +47,7 @@ body,
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 5;
 }
 
 .btn-gold:hover {
@@ -92,6 +93,32 @@ body,
     cursor: pointer;
 }
 
+.open {
+    background: #ffffff99;
+}
+
+.map-item {
+    padding: 3px;
+    border-radius: 3px;
+    margin: 5px;
+    border: 2px solid #ffffff;
+    background: #ffffff44;
+    font-size: x-large;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .map-item {
+
+} */
+
+.map-item:hover {
+    background: #ffffff99;
+    cursor: pointer;
+}
 
 
 

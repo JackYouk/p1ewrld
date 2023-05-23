@@ -1,6 +1,6 @@
 
 
-export default function Crossbows({ nodes, materials }) {
+export function WorldCrossbows({ nodes, materials }) {
 
     return (
         <>
@@ -92,6 +92,39 @@ export default function Crossbows({ nodes, materials }) {
                     material={materials.lpb_gradient}
                 />
             </group>
+        </>
+    )
+}
+
+export function MarketCrossbows({ nodes, materials, scale, position }) {
+
+    return (
+        <>
+            <group scale={scale ?? 2} position={position ?? [0, 0, 0]}>
+                <group
+                    name="Crossbow001_40"
+                    position={[0, 1, 0]}
+                    scale={0.21}
+                >
+                    <mesh
+                        name="Object_80"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Object_80.geometry}
+                        material={materials.lpb_gradient}
+                    />
+                </group>
+                <group name="Tower001_39" position={[0, 0, 0]}>
+                    <mesh
+                        name="Object_78"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Object_78.geometry}
+                        material={materials.lpb_gradient}
+                    />
+                </group>
+            </group>
+
         </>
     )
 }

@@ -13,15 +13,13 @@ import Stairs from './world-assets/map/Stairs';
 import Bridge from './world-assets/map/Bridge';
 import Trees from './world-assets/map/Trees';
 import Bushes from './world-assets/map/Bushes';
-import Banks from './world-assets/buildings/Banks';
-import Blacksmith from './world-assets/buildings/Blacksmith';
-import Cannon from './world-assets/buildings/Cannon';
-import Crossbows from './world-assets/buildings/Crossbows';
-import Houses from './world-assets/buildings/Houses';
-import Mansion from './world-assets/buildings/Mansion';
-import Pub from './world-assets/buildings/Pub';
-import WaterWheel from './world-assets/buildings/WaterWheel';
-import Windmill from './world-assets/buildings/Windmill';
+import { 
+    WorldBanks, WorldBlacksmith, WorldCannon, 
+    WorldCrossbows, WorldHouses, WorldMansion, 
+    WorldPub, WorldWaterwheel, WorldWindmill, 
+} from './world-assets/buildings';
+
+// Context/State
 import { PlayerContext } from '../context/playerContext';
 
 
@@ -54,15 +52,15 @@ export default function World() {
                     <FloatingName scale={0.5} position={[0.02, 5, 0]} />
 
                     {/* Buildings */}
-                    {banks ? <Banks nodes={nodes} materials={materials} /> : <></>}
-                    {blacksmith ? <Blacksmith nodes={nodes} materials={materials} /> : <></>}
-                    {cannon ? <Cannon nodes={nodes} materials={materials} /> : <></>}
-                    {crossbows ? <Crossbows nodes={nodes} materials={materials} /> : <></>}
-                    {houses ? <Houses nodes={nodes} materials={materials} /> : <></>}
-                    {mansion ? <Mansion nodes={nodes} materials={materials} /> : <></>}
-                    {pub ? <Pub nodes={nodes} materials={materials} /> : <></>}
-                    {waterwheel ? <WaterWheel nodes={nodes} materials={materials} /> : <></>}
-                    {windmill ? <Windmill nodes={nodes} materials={materials} /> : <></>}
+                    {banks ? <WorldBanks nodes={nodes} materials={materials} /> : <></>}
+                    {blacksmith ? <WorldBlacksmith nodes={nodes} materials={materials} /> : <></>}
+                    {cannon ? <WorldCannon nodes={nodes} materials={materials} /> : <></>}
+                    {crossbows ? <WorldCrossbows nodes={nodes} materials={materials} /> : <></>}
+                    {houses ? <WorldHouses nodes={nodes} materials={materials} /> : <></>}
+                    {mansion ? <WorldMansion nodes={nodes} materials={materials} /> : <></>}
+                    {pub ? <WorldPub nodes={nodes} materials={materials} /> : <></>}
+                    {waterwheel ? <WorldWaterwheel nodes={nodes} materials={materials} /> : <></>}
+                    {windmill ? <WorldWindmill nodes={nodes} materials={materials} /> : <></>}
 
                 </group>
             </RigidBody>

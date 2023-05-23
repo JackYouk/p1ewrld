@@ -1,6 +1,6 @@
 
 
-export default function Banks({ nodes, materials }) {
+export function WorldBanks({ nodes, materials }) {
 
     return (
         <>
@@ -19,6 +19,23 @@ export default function Banks({ nodes, materials }) {
                     castShadow
                     receiveShadow
                     geometry={nodes.Object_100.geometry}
+                    material={materials.lpb_gradient}
+                />
+            </group>
+        </>
+    )
+}
+
+export function MarketBanks({ nodes, materials, scale, position }) {
+
+    return (
+        <>
+            <group scale={scale ?? 2} name="Banks" position={position ?? [0, 0, 0]}>
+                <mesh
+                    name="Object_98"
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_98.geometry}
                     material={materials.lpb_gradient}
                 />
             </group>

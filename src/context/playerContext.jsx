@@ -1,28 +1,35 @@
+// React
 import { createContext, useContext, useEffect, useState } from "react";
+
+// Lib/firestore
+import { getUser } from "../lib/users";
 
 const Context = createContext();
 
 export const PlayerProvider = ({ children }) => {
+    const [loading, setLoading] = useState(false);
 
     // AUTH CONTEXT ====================================================================
     const [currentUser, setCurrentUser] = useState(null);
 
-    const user = {
-        uid: '',
-        username: 'Test User',
-        piAddress: '0x7326689326798236963',
-        totalPi: 200,
-        currentAvatar: {
-            filepath: '',
-            name: '',
-
-        },
-        collection: [],
+    const getUserPiWallet = async () => {
+        // const scopes = ['username', 'payments', 'wallet_address'];
+        // const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+        return '0x7326689326798236963'
     }
 
     // login with pi network and check users table of firestore
-    const login = () => {
-        setCurrentUser(user);
+    const login =  async () => {
+        setLoading(true);
+        const piAddress = await getUserPiWallet();
+        const user = await getUser(piAddress);
+        if(!user) return;
+        if(user.error){
+            console.log(user.error);
+        }else{
+            setCurrentUser(user);
+        }
+        setLoading(false);
     }
 
     const logout = () => {
@@ -45,12 +52,18 @@ export const PlayerProvider = ({ children }) => {
         windmill: false,
     });
 
+    useEffect(() => {
+        if(!loading && currentUser && currentUser.activeBuildings){
+            setActiveBuildings(currentUser.activeBuildings);
+        }    
+    }, [currentUser])
+
+   
     const value = {
         // Auth
         currentUser,
         login,
         logout,
-        user,
 
         // Avatar
         avatar,
@@ -63,7 +76,7 @@ export const PlayerProvider = ({ children }) => {
 
     return (
         <Context.Provider value={value}>
-            {children}
+            {!loading && children}
         </Context.Provider>
     );
 }

@@ -34,7 +34,7 @@ export default function Interface() {
                                 display: 'flex',
                                 padding: '5px',
                                 margin: '10px',
-                                marginTop: '60px',
+                                marginTop: '100px',
                                 borderRadius: '3px',
                                 flexDirection: `column`,
                                 overflowY: 'scroll',
@@ -51,6 +51,7 @@ export default function Interface() {
                                         navigate(selectedGame.slug);
                                     }}>Go</div>
                                 </div>
+                                
                                 <div
                                     className="game-item"
                                     style={{
@@ -66,6 +67,7 @@ export default function Interface() {
 
                                     </div>
                                 </div>
+                                
                                 <div
                                     className="game-item"
                                     style={{

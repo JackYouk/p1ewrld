@@ -7,76 +7,217 @@ import { PlayerContext } from '../context/playerContext';
 
 // Components
 import ItemModel from "./ItemModel";
+import BuildingModel from "./BuildingModel";
 
 // Market Pages
 import MyCollection from "./MyCollection";
+
+// R3F/Three
+import { useGLTF } from "@react-three/drei";
+
+// Models
+import {
+    MarketBanks, MarketHouses, MarketBlacksmith,
+    MarketCannon, MarketCrossbows, MarketMansion,
+    MarketPub, MarketWaterwheel, MarketWindmill,
+} from "../p1e-world/world-assets/buildings";
+
+// HardCoded Data
+import { BuildingData } from "./BuildingData";
+import { AvatarData } from "./AvatarData";
 
 export default function Market() {
     const navigate = useNavigate();
     const { currentUser, login, logout } = PlayerContext();
 
-    if (document.body.querySelector('#nipple_0_0')) {
-        document.body.querySelector('#nipple_0_0').remove()
-    }
-
+    // Auth
     const [page, setPage] = useState('Login');
 
     useEffect(() => {
         if (currentUser) {
             setPage('Market');
         }
+        if (!currentUser) {
+            setPage('Login')
+        }
     }, [currentUser]);
 
-    const buyAvatar = () => {
+
+    // GET ITEMS
+    const [loading, setLoading] = useState(false);
+
+    const [avatars, setAvatars] = useState([]);
+    const getAvatars = async () => {
+        setLoading(true);
+        setAvatars(AvatarData);
+        setLoading(false);
+    }
+
+    const [buildings, setBuildings] = useState([]);
+    const getBuildings = async () => {
+        setLoading(true);
+        setBuildings(BuildingData);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getAvatars();
+        getBuildings();
+    }, []);
+
+
+    // BUY ITEMS
+    const [buyAvatarModal, setBuyAvatarModal] = useState(null);
+
+    const buyAvatar = (avatar) => {
+        setBuyAvatarModal(avatar);
         return;
     }
 
-    // market page - chose avatars from the market ($0.99 - $19.99 based on rarity)
+    const [buyBuildingModal, setBuyBuildingModal] = useState(null);
+
+    const buyBuilding = (building) => {
+        setBuyBuildingModal(building);
+        return;
+    }
 
 
+    // Pi SDK Transact function call
+    const transact = async () => {
+
+    }
+
+    // buildings loader
+    const { nodes, materials } = useGLTF("/lowpoly_world.glb");
+
+    console.log()
     return (
         <div style={{ backgroundColor: 'gray', width: '100%', height: '100dvh', position: 'absolute', color: 'white' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div className="btn" onClick={() => navigate(-1)}>back to game</div>
-                {currentUser ? <div className="btn-gold" onClick={() => setPage('Bank')}>{`${currentUser.totalPi}𝜋`}</div> : <></>}
+                {currentUser ? <div className="btn-gold">{`${currentUser.totalPi}𝜋`}</div> : <></>}
             </div>
             <div style={{ textAlign: 'center', fontSize: '50px' }}>{page}</div>
 
-            {page === 'Login' ? <></> : <div className="market-nav">
-                <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Market' ? 'underline' : 'none'}` }} onClick={() => setPage('Market')}>Market</div>
-                <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'My Collection' ? 'underline' : 'none'}` }} onClick={() => setPage('My Collection')}>My Collection</div>
-            </div>}
 
             {page === 'Login' ? (
                 <>
+                    {/* Login Page */}
                     <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <div className="btn" onClick={() => login()}>Login</div>
                     </div>
                 </>
-            ) : <></>}
+            ) : (
+                // Market Nav if logged in
+                <div className="market-nav">
+                    <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Market' ? 'underline' : 'none'}` }} onClick={() => setPage('Market')}>Market</div>
+                    <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'My Collection' ? 'underline' : 'none'}` }} onClick={() => setPage('My Collection')}>My Collection</div>
+                </div>
+            )}
 
             {page === 'Market' ? (
                 <>
-                    <div style={{ display: 'flex', padding: '5px', flexDirection: `${window.innerWidth < 600 ? 'column' : 'row'}`, overflowY: 'scroll', maxHeight: '75dvh' }}>
-                        <div className="market-item" onClick={() => buyAvatar()}>
-                            <ItemModel glb={'./pie.glb'} scale={0.65} />
-                            <div style={{}}>
-                                Default P1E
+                    {/* BUY MODAL ============================================================================================================================================= */}
+                    {buyAvatarModal ? (
+                        <div onClick={() => setBuyAvatarModal(null)} style={{ position: 'absolute', top: 0, width: '100%', height: '100dvh', backgroundColor: '#00000099' }}>
+                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px' }}>
+                                <div className="market-item open" style={{}}>
+                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                                        {buyAvatarModal.type}
+                                    </div>
+                                    <ItemModel glb={buyAvatarModal.filepath} scale={buyAvatarModal.modelScale} />
+                                    <div style={{}}>
+                                        {buyAvatarModal.name}
+                                    </div>
+                                    <div style={{ fontSize: '18px' }}>
+                                        <span style={{ color: 'green' }}>{buyAvatarModal.rarity}</span> - {`${buyAvatarModal.cost}𝜋`}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', margin: '20px', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ fontSize: 'x-large' }}>Cost: {buyAvatarModal.cost}</div>
+                                    <div className="btn-gold" onClick={() => transact(buyAvatarModal.id, buyAvatarModal.cost, buyAvatarModal.posterWallet)}>Buy Now</div>
+                                </div>
                             </div>
-                            <div style={{ fontSize: '18px' }}>
-                                <span style={{ color: 'green' }}>Common</span> - Default
-                            </div>
+
                         </div>
-                        <div className="market-item" onClick={() => buyAvatar()}>
-                            <ItemModel glb={'./rare_pie.glb'} scale={1.7} />
-                            <div style={{}}>
-                                Rare P1E
+                    ) : buyBuildingModal ? (
+                        <div onClick={() => setBuyBuildingModal(null)} style={{ position: 'absolute', top: 0, width: '100%', height: '100dvh', backgroundColor: '#00000099' }}>
+                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px' }}>
+                                <div className="map-item">
+                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#E6E6FA' }}>
+                                        {buyBuildingModal.type}
+                                    </div>
+                                    <BuildingModel>
+                                        {'Market' + buyBuildingModal.name === MarketBanks.name ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {'Market' + buyBuildingModal.name === MarketBlacksmith.name ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {'Market' + buyBuildingModal.name === MarketCannon.name ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {'Market' + buyBuildingModal.name === MarketCrossbows.name ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {'Market' + buyBuildingModal.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {'Market' + buyBuildingModal.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                    </BuildingModel>
+                                    <div style={{}}>
+                                        {buyBuildingModal.name}
+                                    </div>
+                                    <div style={{ fontSize: '18px' }}>
+                                        <span style={{ color: `${buyBuildingModal.rarity === "Rare" ? 'gold' : 'green'}` }}>{buyBuildingModal.rarity}</span> - {`${buyBuildingModal.cost}𝜋`}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', margin: '20px', justifyContent: 'center', alignItems: 'center' }}>
+                                    <div style={{ fontSize: 'x-large' }}>Cost: {buyBuildingModal.cost}</div>
+                                    <div className="btn-gold" onClick={() => transact(buyBuildingModal.id, buyBuildingModal.cost, buyBuildingModal.posterWallet)}>Buy Now</div>
+                                </div>
                             </div>
-                            <div style={{ fontSize: '18px' }}>
-                                <span style={{ color: 'gold' }}>Rare</span> - {`10𝜋`}
-                            </div>
+
                         </div>
-                    </div>
+                    ) : (<>
+
+                        {/* MARKET ITEMS ============================================================================================================================================= */}
+
+                        <div style={{ display: 'flex', padding: '5px', flexDirection: `${window.innerWidth < 600 ? 'column' : 'row'}`, overflowY: 'scroll', maxHeight: '75dvh' }}>
+
+                            {avatars.map(avatar => {
+                                return (
+                                    <div className="market-item" key={avatar.id} onClick={() => buyAvatar(avatar)}>
+                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                                            {avatar.type}
+                                        </div>
+                                        <ItemModel glb={avatar.filepath} scale={avatar.scale} />
+                                        <div style={{}}>
+                                            {avatar.name}
+                                        </div>
+                                        <div style={{ fontSize: '18px' }}>
+                                            <span style={{ color: `${avatar.rarity === "Rare" ? 'gold' : 'green'}` }}>{avatar.rarity}</span> - {`${avatar.cost}𝜋`}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+
+                            {buildings.map(building => {
+                                return (
+                                    <div className="map-item" key={building.id} onClick={() => buyBuilding(building)}>
+                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#E6E6FA' }}>
+                                            {building.type}
+                                        </div>
+                                        <BuildingModel>
+                                            {'Market' + building.name === MarketBanks.name ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketBlacksmith.name ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketCannon.name ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketCrossbows.name ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        </BuildingModel>
+                                        <div style={{}}>
+                                            {building.name}
+                                        </div>
+                                        <div style={{ fontSize: '18px' }}>
+                                            <span style={{ color: `${building.rarity === "Rare" ? 'gold' : 'green'}` }}>{building.rarity}</span> - {`${building.cost}𝜋`}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+
+                        </div>
+                    </>)}
                 </>
             ) : <></>}
 

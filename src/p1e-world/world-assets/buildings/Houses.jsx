@@ -1,6 +1,6 @@
 
 
-export default function Houses({ nodes, materials }) {
+export function WorldHouses({ nodes, materials }) {
 
     return (
         <>
@@ -36,6 +36,23 @@ export default function Houses({ nodes, materials }) {
                     castShadow
                     receiveShadow
                     geometry={nodes.Object_106.geometry}
+                    material={materials.lpb_gradient}
+                />
+            </group>
+        </>
+    )
+}
+
+export function MarketHouses({ nodes, materials, scale, position }) {
+
+    return (
+        <>
+            <group scale={scale ?? 2} name='Houses' position={position ?? [0, 0, 0]}>
+                <mesh
+                    name="Object_102"
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_102.geometry}
                     material={materials.lpb_gradient}
                 />
             </group>
