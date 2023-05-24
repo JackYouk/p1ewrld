@@ -56,7 +56,7 @@ export default function Interface() {
                                     className="game-item"
                                     style={{
                                         filter: `${selectedGame.game === 'My P1E World' ? 'none' : ''}`,
-                                        background: `url("https://1.bp.blogspot.com/-GCtvzUJK9cI/X6D539t0tQI/AAAAAAAABiU/XLXZCucHXxMfbDu2ChhsyBelPZAr-HeQgCLcBGAsYHQ/w1200-h630-p-k-no-nu/how-to-play-minecraft-at-school-with-vpn.jpg")`
+                                        background: `url("./conceptBanner.png")`
                                     }}
                                     onClick={() => setSelectedGame({ game: 'My P1E World', slug: '/' })}
                                 >
@@ -72,7 +72,7 @@ export default function Interface() {
                                     className="game-item"
                                     style={{
                                         filter: `${selectedGame.game === 'P1E Stacker' ? 'none' : ''}`,
-                                        background: `url("https://www.timeslifestyle.net/wp-content/uploads/2021/07/CS-GO.jpg")`
+                                        background: `url("./banner2.png")`
                                     }}
                                     onClick={(e) => { setSelectedGame({ game: 'P1E Stacker', slug: '/p1e-stacker' }) }}
                                 >
