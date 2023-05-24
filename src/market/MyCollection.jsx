@@ -46,52 +46,52 @@ export default function MyCollection() {
 
     return (
         <>
-            <div style={{ display: 'flex', padding: '5px', flexDirection: `${window.innerWidth < 600 ? 'column' : 'row'}`, overflowY: 'scroll', maxHeight: '75dvh' }}>
+            <div style={{ display: 'flex', padding: '5px', flexWrap: 'wrap', overflowY: 'scroll', justifyContent: 'center', maxHeight: '75dvh' }}>
                 <div className="active-item">
                     <ItemModel glb={avatar.glb} scale={avatar.marketScale} />
-                    <div style={{}}>
+                    <div style={{fontSize: '15px'}}>
                         Active P1E
                     </div>
                 </div>
                 <div className="market-item" onClick={() => setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })}>
-                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                    <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
                         Avatar
                     </div>
                     <ItemModel glb={'./pie.glb'} scale={0.65} />
-                    <div style={{}}>
+                    <div style={{fontSize: '15px'}}>
                         Default P1E
                     </div>
-                    <div style={{ fontSize: '18px' }}>
+                    <div style={{ fontSize: '12px' }}>
                         <span style={{ color: 'green' }}>Common</span> - Default
                     </div>
                 </div>
                 {myAvatars.map(item => {
                     return (
                         <div key={item.id} className="market-item" onClick={() => setAvatar({ glb: 'rare_pie.glb', gameScale: 0.08, marketScale: 1.7 })}>
-                            <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                            <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
                                 Avatar
                             </div>
                             <ItemModel glb={item.glb} scale={item.scale} />
-                            <div style={{}}>
+                            <div style={{fontSize: '15px'}}>
                                 {item.name}
                             </div>
-                            <div style={{ fontSize: '18px' }}>
+                            <div style={{ fontSize: '12px' }}>
                                 <span style={{ color: 'gold' }}>{item.rarity}</span> {`${item.cost ? ' - ' + item.cost + '𝜋' : ''}`}
                             </div>
                         </div >
                     );
                 })}
                 <div className="map-item" onClick={() => setActiveBuildings({ ...activeBuildings, houses: !activeBuildings.houses })}>
-                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#E6E6FA' }}>
+                    <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
                         Building <span style={{color: `${activeBuildings.houses ? 'lightgreen' : 'orange'}`}}>{activeBuildings.houses ? ' - Active' : ' - Not Active'}</span>
                     </div>
                     <BuildingModel>
                         <MarketHouses nodes={nodes} materials={materials} scale={5} position={[0, -2, 0]} />
                     </BuildingModel>
-                    <div style={{}}>
+                    <div style={{fontSize: '15px'}}>
                         Houses
                     </div>
-                    <div style={{ fontSize: '18px' }}>
+                    <div style={{ fontSize: '12px' }}>
                         <span style={{ color: 'green' }}>Common</span> - Default
                     </div>
                 </div>

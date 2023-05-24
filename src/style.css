@@ -64,6 +64,7 @@ body,
     padding: 3px;
     margin: 5px;
     border-radius: 3px;
+    width: 85%;
     border: 2px solid #ffffff;
     background: #d349e344;
     font-size: x-large;
@@ -77,10 +78,11 @@ body,
 .market-item {
     padding: 3px;
     border-radius: 3px;
-    margin: 5px;
+    margin: 1%;
+    width: 25%;
     border: 2px solid #ffffff;
     background: #ffffff44;
-    font-size: x-large;
+    font-size: large;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -100,10 +102,11 @@ body,
 .map-item {
     padding: 3px;
     border-radius: 3px;
-    margin: 5px;
+    width: 25%;
+    margin: 1%;
     border: 2px solid #ffffff;
     background: #ffffff44;
-    font-size: x-large;
+    font-size: large;
     text-align: center;
     display: flex;
     flex-direction: column;

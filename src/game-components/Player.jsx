@@ -12,7 +12,7 @@ import { PlayerContext } from '../context/playerContext.jsx'
 import { ControlsContext } from '../context/controlsContext.jsx'
 
 
-export default function Player() {
+export default function Player({colliders, position, restitution, linearDamping, angularDamping, friction}) {
     const { avatar, setAvatar } = PlayerContext();
     const {cameraZoom, setCameraZoom, controls, setControls} = ControlsContext();
     const body = useRef()
@@ -49,7 +49,7 @@ export default function Player() {
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
 
-        const impulseStrength = 2.5 * delta
+        const impulseStrength = 3 * delta
         // const torqueStrength = 2 * delta
 
         if (forward) {
@@ -119,12 +119,12 @@ export default function Player() {
         <>
             <RigidBody
                 ref={body}
-                colliders="hull"
-                restitution={0.2}
-                friction={1}
-                linearDamping={0.5}
-                angularDamping={0.5}
-                position={[0.6, 1, -2.8]}
+                colliders={colliders ?? 'hull'}
+                restitution={restitution ?? 0.2}
+                friction={friction ?? 1}
+                linearDamping={linearDamping ?? 0.5}
+                angularDamping={angularDamping ?? 0.5}
+                position={position ?? [0.6, 1, -2.8]}
             >
                 <Gltf src={avatar.glb} scale={avatar.gameScale} castShadow />
             </RigidBody>

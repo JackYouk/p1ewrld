@@ -1,5 +1,6 @@
 import { Environment, Gltf } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 
 export default function ItemModel({ glb, scale }) {
     return (
@@ -11,10 +12,12 @@ export default function ItemModel({ glb, scale }) {
                 far: 200,
                 position: [0, 0, 10]
             }}
-            style={{ height: '175px', width: '175px' }}
+            style={{ height: '100px', width: '120px' }}
         >
-            <Environment preset="city" />
-            <Gltf src={glb} rotation-x={0.5} scale={scale} />
+            <Suspense fallback={null}>
+                <Environment preset="city" />
+                <Gltf src={glb} rotation-x={0.5} scale={scale} />
+            </Suspense>
         </Canvas>
     );
 }

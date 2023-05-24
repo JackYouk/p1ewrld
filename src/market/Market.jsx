@@ -90,7 +90,6 @@ export default function Market() {
     // buildings loader
     const { nodes, materials } = useGLTF("/lowpoly_world.glb");
 
-    console.log()
     return (
         <div style={{ backgroundColor: 'gray', width: '100%', height: '100dvh', position: 'absolute', color: 'white' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -115,14 +114,14 @@ export default function Market() {
                 </div>
             )}
 
-            {page === 'Market' ? (
+            {page === 'Market' && !loading ? (
                 <>
                     {/* BUY MODAL ============================================================================================================================================= */}
                     {buyAvatarModal ? (
                         <div onClick={() => setBuyAvatarModal(null)} style={{ position: 'absolute', top: 0, width: '100%', height: '100dvh', backgroundColor: '#00000099' }}>
-                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px' }}>
-                                <div className="market-item open" style={{}}>
-                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <div className="market-item open" style={{width: '50%'}}>
+                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '15px', color: '#702963' }}>
                                         {buyAvatarModal.type}
                                     </div>
                                     <ItemModel glb={buyAvatarModal.filepath} scale={buyAvatarModal.modelScale} />
@@ -142,9 +141,9 @@ export default function Market() {
                         </div>
                     ) : buyBuildingModal ? (
                         <div onClick={() => setBuyBuildingModal(null)} style={{ position: 'absolute', top: 0, width: '100%', height: '100dvh', backgroundColor: '#00000099' }}>
-                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px' }}>
-                                <div className="map-item">
-                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#E6E6FA' }}>
+                            <div onClick={e => e.stopPropagation()} style={{ margin: '20px', marginTop: '150px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <div className="map-item" style={{width: '50%'}}>
+                                    <div style={{ width: '100%', textAlign: 'start', fontSize: '15px', color: '#E6E6FA' }}>
                                         {buyBuildingModal.type}
                                     </div>
                                     <BuildingModel>
@@ -173,19 +172,19 @@ export default function Market() {
 
                         {/* MARKET ITEMS ============================================================================================================================================= */}
 
-                        <div style={{ display: 'flex', padding: '5px', flexDirection: `${window.innerWidth < 600 ? 'column' : 'row'}`, overflowY: 'scroll', maxHeight: '75dvh' }}>
+                        <div style={{ display: 'flex',  padding: '5px', overflowY: 'scroll', maxHeight: '75vh', flexWrap: 'wrap', justifyContent: 'center' }}>
 
                             {avatars.map(avatar => {
                                 return (
                                     <div className="market-item" key={avatar.id} onClick={() => buyAvatar(avatar)}>
-                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#702963' }}>
+                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
                                             {avatar.type}
                                         </div>
-                                        <ItemModel glb={avatar.filepath} scale={avatar.scale} />
-                                        <div style={{}}>
+                                        <ItemModel glb={avatar.filepath} scale={avatar.modelScale} />
+                                        <div style={{fontSize: '15px'}}>
                                             {avatar.name}
                                         </div>
-                                        <div style={{ fontSize: '18px' }}>
+                                        <div style={{ fontSize: '12px' }}>
                                             <span style={{ color: `${avatar.rarity === "Rare" ? 'gold' : 'green'}` }}>{avatar.rarity}</span> - {`${avatar.cost}𝜋`}
                                         </div>
                                     </div>
@@ -195,7 +194,7 @@ export default function Market() {
                             {buildings.map(building => {
                                 return (
                                     <div className="map-item" key={building.id} onClick={() => buyBuilding(building)}>
-                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '20px', color: '#E6E6FA' }}>
+                                        <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
                                             {building.type}
                                         </div>
                                         <BuildingModel>
@@ -206,10 +205,10 @@ export default function Market() {
                                             {'Market' + building.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                             {'Market' + building.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                         </BuildingModel>
-                                        <div style={{}}>
+                                        <div style={{fontSize: '15px'}}>
                                             {building.name}
                                         </div>
-                                        <div style={{ fontSize: '18px' }}>
+                                        <div style={{ fontSize: '12px' }}>
                                             <span style={{ color: `${building.rarity === "Rare" ? 'gold' : 'green'}` }}>{building.rarity}</span> - {`${building.cost}𝜋`}
                                         </div>
                                     </div>

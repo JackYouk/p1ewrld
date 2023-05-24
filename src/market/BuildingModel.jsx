@@ -1,5 +1,6 @@
 import { Environment,  } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 
 export default function BuildingModel({children}) {
 
@@ -12,10 +13,12 @@ export default function BuildingModel({children}) {
             far: 200,
             position: [0, 0, 10]
         }}
-        style={{ height: '175px', width: '175px' }}
-    >
-        <Environment preset="city" />
-        {children}
+        style={{ height: '100px', width: '120px' }}
+        >
+        <Suspense fallback={null}>
+            <Environment preset="city" />
+            {children}
+        </Suspense>
     </Canvas>
     );
 }
