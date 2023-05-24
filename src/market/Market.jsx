@@ -203,7 +203,7 @@ export default function Market() {
                                             {'Market' + building.name === MarketCannon.name ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                             {'Market' + building.name === MarketCrossbows.name ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                             {'Market' + building.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {'Market' + building.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} />}
                                         </BuildingModel>
                                         <div style={{fontSize: '15px'}}>
                                             {building.name}
