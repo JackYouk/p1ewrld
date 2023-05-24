@@ -41,15 +41,15 @@ export const PlayerProvider = ({ children }) => {
 
     // Map Context =======================================================================
     const [activeBuildings, setActiveBuildings] = useState({
-        banks: false,
-        blacksmith: false,
-        cannon: false,
-        crossbows: false,
-        houses: false,
-        mansion: false,
-        pub: false,
-        waterwheel: false,
-        windmill: false,
+        banks: true,
+        blacksmith: true,
+        cannon: true,
+        crossbows: true,
+        houses: true,
+        mansion: true,
+        pub: true,
+        waterwheel: true,
+        windmill: true,
     });
 
     useEffect(() => {

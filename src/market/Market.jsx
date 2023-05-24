@@ -129,7 +129,7 @@ export default function Market() {
                                         {buyAvatarModal.name}
                                     </div>
                                     <div style={{ fontSize: '18px' }}>
-                                        <span style={{ color: `${buyBuildingModal.rarity === "Rare" ? 'gold' : 'green'}` }}>{buyAvatarModal.rarity}</span> - {`${buyAvatarModal.cost}𝜋`}
+                                        <span style={{ color: `${buyAvatarModal.rarity === "Rare" ? 'gold' : 'green'}` }}>{buyAvatarModal.rarity}</span> - {`${buyAvatarModal.cost}𝜋`}
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', margin: '20px', justifyContent: 'center', alignItems: 'center' }}>
