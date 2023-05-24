@@ -147,12 +147,12 @@ export default function Market() {
                                         {buyBuildingModal.type}
                                     </div>
                                     <BuildingModel>
-                                        {'Market' + buyBuildingModal.name === MarketBanks.name ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                        {'Market' + buyBuildingModal.name === MarketBlacksmith.name ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                        {'Market' + buyBuildingModal.name === MarketCannon.name ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                        {'Market' + buyBuildingModal.name === MarketCrossbows.name ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                        {'Market' + buyBuildingModal.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                        {'Market' + buyBuildingModal.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                        {buyBuildingModal.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                     </BuildingModel>
                                     <div style={{}}>
                                         {buyBuildingModal.name}
@@ -198,12 +198,12 @@ export default function Market() {
                                             {building.type}
                                         </div>
                                         <BuildingModel>
-                                            {'Market' + building.name === MarketBanks.name ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketBlacksmith.name ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketCannon.name ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketCrossbows.name ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketMansion.name ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                            {'Market' + building.name === MarketPub.name ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} />}
+                                            {building.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {building.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {building.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {building.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {building.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            {building.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
                                         </BuildingModel>
                                         <div style={{fontSize: '15px'}}>
                                             {building.name}
