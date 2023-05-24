@@ -15,7 +15,7 @@ export default function BuildingModel({children}) {
         }}
         style={{ height: '100px', width: '120px' }}
         >
-        <Suspense fallback={<>Hello</>}>
+        <Suspense fallback={null}>
             <Environment preset="city" />
             {children}
         </Suspense>
