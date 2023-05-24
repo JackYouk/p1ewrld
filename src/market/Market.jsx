@@ -174,7 +174,7 @@ export default function Market() {
 
                         <div style={{ display: 'flex',  padding: '5px', overflowY: 'scroll', maxHeight: '75vh', flexWrap: 'wrap', justifyContent: 'center' }}>
 
-                            {avatars.map(avatar => {
+                            {avatars?.map(avatar => {
                                 return (
                                     <div className="market-item" key={avatar.id} onClick={() => buyAvatar(avatar)}>
                                         <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
@@ -191,7 +191,7 @@ export default function Market() {
                                 )
                             })}
 
-                            {buildings.map(building => {
+                            {buildings?.map(building => {
                                 return (
                                     <div className="map-item" key={building.id} onClick={() => buyBuilding(building)}>
                                         <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
@@ -226,3 +226,5 @@ export default function Market() {
         </div>
     );
 }
+
+useGLTF.preload("/lowpoly_world.glb");

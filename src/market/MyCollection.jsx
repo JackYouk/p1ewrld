@@ -99,3 +99,5 @@ export default function MyCollection() {
         </>
     )
 }
+
+useGLTF.preload("/lowpoly_world.glb");
