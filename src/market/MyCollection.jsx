@@ -9,8 +9,8 @@ import { useGLTF } from "@react-three/drei";
 import { PlayerContext } from '../context/playerContext';
 
 // Components
-import ItemModel from "./ItemModel";
-import BuildingModel from "./BuildingModel";
+import ItemModel from "./components/ItemModel";
+import BuildingModel from "./components/BuildingModel";
 
 // Models
 import { 
@@ -22,7 +22,7 @@ import {
 
 export default function MyCollection() {
     const navigate = useNavigate();
-    const { currentUser, login, logout, avatar, setAvatar, activeBuildings, setActiveBuildings } = PlayerContext();
+    const { currentUser, login, logout, avatar, updateAvatar, activeBuildings, updateActiveBuildings } = PlayerContext();
 
     const myAvatars = [
         {
@@ -53,7 +53,7 @@ export default function MyCollection() {
                         Active P1E
                     </div>
                 </div>
-                <div className="market-item" onClick={() => setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })}>
+                <div className="market-item" onClick={() => updateAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })}>
                     <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
                         Avatar
                     </div>
@@ -67,7 +67,7 @@ export default function MyCollection() {
                 </div>
                 {myAvatars.map(item => {
                     return (
-                        <div key={item.id} className="market-item" onClick={() => setAvatar({ glb: 'rare_pie.glb', gameScale: 0.08, marketScale: 1.7 })}>
+                        <div key={item.id} className="market-item" onClick={() => updateAvatar({ glb: 'rare_pie.glb', gameScale: 0.08, marketScale: 1.7 })}>
                             <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#702963' }}>
                                 Avatar
                             </div>
@@ -81,7 +81,7 @@ export default function MyCollection() {
                         </div >
                     );
                 })}
-                <div className="map-item" onClick={() => setActiveBuildings({ ...activeBuildings, houses: !activeBuildings.houses })}>
+                <div className="map-item" onClick={() => updateActiveBuildings({ ...activeBuildings, houses: !activeBuildings.houses })}>
                     <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
                         Building <span style={{color: `${activeBuildings.houses ? 'lightgreen' : 'orange'}`}}>{activeBuildings.houses ? ' - Active' : ' - Not Active'}</span>
                     </div>

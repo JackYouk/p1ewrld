@@ -1,7 +1,7 @@
 import { collection, query, where, getDocs, getDoc, setDoc, doc  } from "firebase/firestore";
 import { db } from './firebase';
 
-export async function getUser(piAddress, username) {
+export async function getUser(piAddress) {
     console.log(piAddress)
     if(!piAddress) return {error: 'no pi address'}
     const q = query(
@@ -19,7 +19,30 @@ export async function getUser(piAddress, username) {
     return user;
 }
 
-export async function setUserAvatar() {
+export async function updateUserAvatar(piAddress, newAvatar) {
+    if(!piAddress) return {error: 'no pi address'};
 
+    const user = await getUser(piAddress);
 
+    const collectionRef = collection(db, "users");
+    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
+        ...user,
+        currentAvatar: newAvatar,
+    });
+
+    return(updatedDoc);
+}
+
+export async function updateUserActiveBuildings(piAddress, newActiveBuildings) {
+    if(!piAddress) return {error: 'no pi address'};
+
+    const user = await getUser(piAddress);
+
+    const collectionRef = collection(db, "users");
+    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
+        ...user,
+        activeBuildings: newActiveBuildings,
+    });
+
+    return(updatedDoc);
 }

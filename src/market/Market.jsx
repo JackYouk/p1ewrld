@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import { PlayerContext } from '../context/playerContext';
 
 // Components
-import ItemModel from "./ItemModel";
-import BuildingModel from "./BuildingModel";
+import ItemModel from "./components/ItemModel";
+import BuildingModel from "./components/BuildingModel";
 
 // Market Pages
 import MyCollection from "./MyCollection";
@@ -23,8 +23,8 @@ import {
 } from "../p1e-world/world-assets/buildings";
 
 // HardCoded Data
-import { BuildingData } from "./BuildingData";
-import { AvatarData } from "./AvatarData";
+import { BuildingData } from "./data/BuildingData";
+import { AvatarData } from "./data/AvatarData";
 
 export default function Market() {
     const navigate = useNavigate();

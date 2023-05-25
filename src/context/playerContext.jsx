@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Lib/firestore
-import { getUser } from "../lib/users";
+import { getUser, updateUserActiveBuildings, updateUserAvatar } from "../lib/users";
 
 const Context = createContext();
 
@@ -28,6 +28,8 @@ export const PlayerProvider = ({ children }) => {
             console.log(user.error);
         }else{
             setCurrentUser(user);
+            setAvatar(user.currentAvatar)
+            setActiveBuildings(user.activeBuildings)
         }
         setLoading(false);
     }
@@ -38,6 +40,14 @@ export const PlayerProvider = ({ children }) => {
 
     // Avatar Context ====================================================================
     const [avatar, setAvatar] = useState({glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 });
+
+    const updateAvatar = async (newAvatar) => {
+        if(!currentUser) return;
+        if(!currentUser.piAddress) return;
+
+        await updateUserAvatar(currentUser.piAddress, newAvatar)
+        setAvatar(newAvatar)
+    }
 
     // Map Context =======================================================================
     const [activeBuildings, setActiveBuildings] = useState({
@@ -52,11 +62,20 @@ export const PlayerProvider = ({ children }) => {
         windmill: true,
     });
 
-    useEffect(() => {
-        if(!loading && currentUser && currentUser.activeBuildings){
-            setActiveBuildings(currentUser.activeBuildings);
-        }    
-    }, [currentUser])
+    const updateActiveBuildings = async (newActiveBuildings) => {
+        if(!currentUser) return;
+        if(!currentUser.piAddress) return;
+
+        await updateUserActiveBuildings(currentUser.piAddress, newActiveBuildings);
+        setActiveBuildings(newActiveBuildings);
+    }
+
+
+    // useEffect(() => {
+    //     if(!loading && currentUser && currentUser.activeBuildings){
+    //         setActiveBuildings(currentUser.activeBuildings);
+    //     }    
+    // }, [currentUser])
 
    
     const value = {
@@ -67,11 +86,11 @@ export const PlayerProvider = ({ children }) => {
 
         // Avatar
         avatar,
-        setAvatar,
+        updateAvatar,
 
         // Map
         activeBuildings,
-        setActiveBuildings
+        updateActiveBuildings,
     }
 
     return (
