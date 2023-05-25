@@ -12,6 +12,14 @@ export const PlayerProvider = ({ children }) => {
     // AUTH CONTEXT ====================================================================
     const [currentUser, setCurrentUser] = useState(null);
 
+    useEffect(() => {
+        const userStr = localStorage.getItem("currentUser");
+        const user = JSON.parse(userStr);
+        if(user){
+            setCurrentUser(user);
+        }
+    }, []);
+
     const getUserPiWallet = async () => {
         // const scopes = ['username', 'payments', 'wallet_address'];
         // const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
@@ -27,14 +35,17 @@ export const PlayerProvider = ({ children }) => {
         if(user.error){
             console.log(user.error);
         }else{
+            const userStr = JSON.stringify(user);
+            localStorage.setItem("currentUser", userStr);
             setCurrentUser(user);
-            setAvatar(user.currentAvatar)
-            setActiveBuildings(user.activeBuildings)
+            setAvatar(user.currentAvatar);
+            setActiveBuildings(user.activeBuildings);
         }
         setLoading(false);
     }
 
     const logout = () => {
+        localStorage.clear();
         setCurrentUser(null);
     }
 

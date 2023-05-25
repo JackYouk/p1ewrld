@@ -1,6 +1,6 @@
 export const BuildingData = [
     {
-        id: 'bdibsduobdso',
+        id: 'b1',
         type: 'Building',
         name: 'Banks',
         rarity: 'Rare',
@@ -8,7 +8,7 @@ export const BuildingData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: '7367ijsdipdjpiwjemnkl932bdhjs',
+        id: 'b2',
         type: 'Building',
         name: 'Blacksmith',
         rarity: 'Rare',
@@ -16,7 +16,7 @@ export const BuildingData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: 'dmskdsmkdsm',
+        id: 'b3',
         type: 'Building',
         name: 'Cannon',
         rarity: 'Rare',
@@ -24,7 +24,7 @@ export const BuildingData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: '78dsg8dsgyu',
+        id: 'b4',
         type: 'Building',
         name: 'Crossbows',
         rarity: 'Rare',
@@ -32,7 +32,7 @@ export const BuildingData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: 'd4s5edstfty',
+        id: 'b5',
         type: 'Building',
         name: 'Mansion',
         rarity: 'Rare',
@@ -40,7 +40,7 @@ export const BuildingData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: '980ds7sdyghbhsdj',
+        id: 'b6',
         type: 'Building',
         name: 'Pub',
         rarity: 'Rare',

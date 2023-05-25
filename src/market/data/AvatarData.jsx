@@ -1,6 +1,6 @@
 export const AvatarData = [
     {
-        id: '7367932bdhjs',
+        id: 'HGXrVjLdO82MnYqtQkZd',
         type: 'Avatar',
         filepath: './rare_pie.glb',
         modelScale: 1.4,
@@ -10,7 +10,7 @@ export const AvatarData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: '7367932bdhjs',
+        id: 'a2',
         type: 'Avatar',
         filepath: './pizza.glb',
         modelScale: 2.5,

@@ -134,6 +134,7 @@ export default function Interface() {
                     <div className='raw' >
                         <div className='games-btn' onClick={() => { setGamesmenuOpen(true) }}>Games</div>
                         <div className='market-btn' onClick={() => { navigate('/market') }}>Market</div>
+                        {!currentUser ? <div className='market-btn' onClick={() => login()}>Login</div> : <></>}
                     </div>
                 </div>
 
