@@ -34,16 +34,14 @@ export default function Market() {
     const { currentUser, login, logout } = PlayerContext();
 
     // Auth
-    const [page, setPage] = useState('Login');
-
+    const [page, setPage] = useState('');
+    
     useEffect(() => {
-        if (currentUser) {
-            setPage('Market');
+        if(currentUser){
+            setPage(page || 'Market')
         }
-        if (!currentUser) {
-            setPage('Login')
-        }
-    }, [currentUser]);
+    }, [currentUser])
+
 
 
     // GET ITEMS
@@ -96,6 +94,8 @@ export default function Market() {
     // buildings loader
     const { nodes, materials } = useGLTF("/lowpoly_world.glb");
 
+    // if(page === 'Loading') return <div style={{ display: 'flex', justifyContent: 'center', height: '50dvh', width: '100%', alignItems: 'center' }}><div className="lds-dual-ring"></div></div>;
+    
     return (
         <div style={{ backgroundColor: 'gray', width: '100%', height: '100dvh', position: 'absolute', color: 'white' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -103,9 +103,9 @@ export default function Market() {
                 {currentUser ? <div className="btn-gold">{`${currentUser.totalPi}𝜋`}</div> : <></>}
             </div>
             <div style={{ textAlign: 'center', fontSize: '50px' }}>{page}</div>
+            
 
-
-            {page === 'Login' ? (
+            {!currentUser ? (
                 <>
                     {/* Login Page */}
                     <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -113,14 +113,12 @@ export default function Market() {
                     </div>
                 </>
             ) : (
-                // Market Nav if logged in
+                <>
                 <div className="market-nav">
                     <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'Market' ? 'underline' : 'none'}` }} onClick={() => setPage('Market')}>Market</div>
                     <div style={{ cursor: 'pointer', margin: '5px', textDecoration: `${page === 'My Collection' ? 'underline' : 'none'}` }} onClick={() => setPage('My Collection')}>My Collection</div>
                 </div>
-            )}
-
-            {page === 'Market' ? (
+                {page === 'Market' ? (
                 <>
                     {loading ? (
                         <div style={{ display: 'flex', justifyContent: 'center', height: '50dvh', width: '100%', alignItems: 'center' }}><div class="lds-dual-ring"></div></div>
@@ -272,6 +270,10 @@ export default function Market() {
             {page === 'My Collection' ? (
                 <MyCollection />
             ) : <></>}
+                </>
+            )}
+
+            
         </div>
     );
 }

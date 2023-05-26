@@ -9,16 +9,43 @@ const Context = createContext();
 export const PlayerProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
+    const [activeBuildings, setActiveBuildings] = useState(null);
+
+    const [avatar, setAvatar] = useState(null);
+
+
     // AUTH CONTEXT ====================================================================
     const [currentUser, setCurrentUser] = useState(null);
-
     useEffect(() => {
-        const userStr = localStorage.getItem("currentUser");
-        const user = JSON.parse(userStr);
-        if(user){
-            setCurrentUser(user);
+        const lsUserStr = localStorage.getItem("currentUser");
+        const lsUser = JSON.parse(lsUserStr);
+        if (lsUser) {
+            setCurrentUser(lsUser);
+            setAvatar(lsUser.currentAvatar);
+            setActiveBuildings(lsUser.activeBuildings);
+        } else {
+            setActiveBuildings({
+                banks: false,
+                blacksmith: false,
+                cannon: false,
+                crossbows: false,
+                houses: false,
+                mansion: false,
+                pub: false,
+                waterwheel: false,
+                windmill: false,
+            })
+            setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })
         }
     }, []);
+    
+    useEffect(() => {
+        if (currentUser) {
+            localStorage.clear();
+            const userStr = JSON.stringify(currentUser);
+            localStorage.setItem("currentUser", userStr);
+        }
+    }, [currentUser]);
 
     const getUserPiWallet = async () => {
         // const scopes = ['username', 'payments', 'wallet_address'];
@@ -27,16 +54,17 @@ export const PlayerProvider = ({ children }) => {
     }
 
     // login with pi network and check users table of firestore
-    const login =  async () => {
+    const login = async () => {
         setLoading(true);
         const piAddress = await getUserPiWallet();
         const user = await getUser(piAddress);
-        if(!user) return;
-        if(user.error){
+        if (!user) return;
+        if (user.error) {
             console.log(user.error);
-        }else{
-            const userStr = JSON.stringify(user);
-            localStorage.setItem("currentUser", userStr);
+        } else {
+            // localStorage.clear();
+            // const userStr = JSON.stringify(user);
+            // localStorage.setItem("currentUser", userStr);
             setCurrentUser(user);
             setAvatar(user.currentAvatar);
             setActiveBuildings(user.activeBuildings);
@@ -50,38 +78,27 @@ export const PlayerProvider = ({ children }) => {
     }
 
     // Avatar Context ====================================================================
-    const [avatar, setAvatar] = useState({glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 });
 
     const updateAvatar = async (newAvatar) => {
-        if(!currentUser) return;
-        if(!currentUser.piAddress) return;
-
+        if (!currentUser) return;
+        if (!currentUser.piAddress) return;
+        setCurrentUser({ ...currentUser, currentAvatar: newAvatar })
         await updateUserAvatar(currentUser.piAddress, newAvatar)
         setAvatar(newAvatar)
     }
 
     // Map Context =======================================================================
-    const [activeBuildings, setActiveBuildings] = useState({
-        banks: false,
-        blacksmith: false,
-        cannon: false,
-        crossbows: false,
-        houses: false,
-        mansion: false,
-        pub: false,
-        waterwheel: false,
-        windmill: false,
-    });
+
 
     const updateActiveBuildings = async (newActiveBuildings) => {
-        if(!currentUser) return;
-        if(!currentUser.piAddress) return;
-
+        if (!currentUser) return;
+        if (!currentUser.piAddress) return;
+        setCurrentUser({ ...currentUser, activeBuildings: newActiveBuildings })
         await updateUserActiveBuildings(currentUser.piAddress, newActiveBuildings);
         setActiveBuildings(newActiveBuildings);
     }
 
-   
+
     const value = {
         // Auth
         currentUser,
