@@ -13,14 +13,14 @@ import ItemModel from "./components/ItemModel";
 import BuildingModel from "./components/BuildingModel";
 
 // Models
-import { 
-    MarketBanks, MarketHouses, MarketBlacksmith, 
-    MarketCannon, MarketCrossbows, MarketMansion, 
+import {
+    MarketBanks, MarketHouses, MarketBlacksmith,
+    MarketCannon, MarketCrossbows, MarketMansion,
     MarketPub, MarketWaterwheel, MarketWindmill,
 } from "../p1e-world/world-assets/buildings";
 
 // Lib/Firebase
-import { getUserAvatars } from "../lib/users";
+import { getUserAvatars, getUserBuildings } from "../lib/users";
 
 
 export default function MyCollection() {
@@ -31,35 +31,45 @@ export default function MyCollection() {
     const [myAvatars, setMyAvatars] = useState([]);
 
     const getAvatars = async () => {
-        if(!currentUser) return;
-        setLoading(true);
+        if (!currentUser) return;
         const piAddress = currentUser.piAddress;
         const avatars = await getUserAvatars(piAddress);
-        console.log(avatars);
-        setLoading(false);
         setMyAvatars(avatars)
     }
 
+    const [myBuildings, setMyBuildings] = useState([]);
+
+    const getBuildings = async () => {
+        if (!currentUser) return;
+        const piAddress = currentUser.piAddress;
+        const buildings = await getUserBuildings(piAddress);
+        setMyBuildings(buildings)
+    }
+
+    const getItems = async () => {
+        if (!currentUser) return;
+        setLoading(true);
+        await getAvatars();
+        await getBuildings();
+        setLoading(false);
+    }
+
     useEffect(() => {
-        getAvatars();
+        getItems();
     }, [])
 
     const { nodes, materials } = useGLTF("/lowpoly_world.glb");
-    // const { banks, blacksmith, cannon, crossbows, houses, mansion, pub, waterwheel, windmill, } = activeBuildings;
-    const myBuildings = [
-
-    ]
 
 
-    if(loading || !currentUser) return <div style={{display: 'flex', justifyContent: 'center', height: '50dvh', width: '100%', alignItems: 'center'}}><div class="lds-dual-ring"></div></div>;
+    if (loading || !currentUser) return <div style={{ display: 'flex', justifyContent: 'center', height: '50dvh', width: '100%', alignItems: 'center' }}><div className="lds-dual-ring"></div></div>;
 
     return (
         <>
             <div style={{ display: 'flex', padding: '5px', flexWrap: 'wrap', overflowY: 'scroll', justifyContent: 'center', maxHeight: '75dvh' }}>
-                
+
                 <div className="active-item">
                     <ItemModel glb={avatar.glb} scale={avatar.marketScale} />
-                    <div style={{fontSize: '15px'}}>
+                    <div style={{ fontSize: '15px' }}>
                         Active P1E
                     </div>
                 </div>
@@ -69,7 +79,7 @@ export default function MyCollection() {
                         Avatar
                     </div>
                     <ItemModel glb={'./pie.glb'} scale={0.65} />
-                    <div style={{fontSize: '15px'}}>
+                    <div style={{ fontSize: '15px' }}>
                         Default P1E
                     </div>
                     <div style={{ fontSize: '12px' }}>
@@ -84,7 +94,7 @@ export default function MyCollection() {
                                 Avatar
                             </div>
                             <ItemModel glb={myAvatar.filepath} scale={myAvatar.marketScale} />
-                            <div style={{fontSize: '15px'}}>
+                            <div style={{ fontSize: '15px' }}>
                                 {myAvatar.name}
                             </div>
                             <div style={{ fontSize: '12px' }}>
@@ -94,14 +104,41 @@ export default function MyCollection() {
                     );
                 }) : <></>}
 
+                {myBuildings.length > 0 ? myBuildings.map(myBuilding => {
+                    return (
+                        <div className="map-item" key={myBuilding.id} onClick={() => updateActiveBuildings({ ...activeBuildings, [myBuilding.key]: !activeBuildings[myBuilding.key] })}>
+                            <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
+                                Building <span style={{ color: `${activeBuildings[myBuilding.key] ? 'lightgreen' : 'orange'}` }}>{activeBuildings[myBuilding.key] ? ' - Active' : ' - Not Active'}</span>
+                            </div>
+                            <BuildingModel>
+                                {myBuilding.name === "Houses" ? <MarketHouses nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Windmill" ? <MarketWindmill nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Waterwheel" ? <MarketWaterwheel nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                {myBuilding.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                            </BuildingModel>
+                            <div style={{ fontSize: '15px' }}>
+                                {myBuilding.name}
+                            </div>
+                            <div style={{ fontSize: '12px' }}>
+                                <span style={{ color: 'green' }}>{myBuilding.rarity}</span> {`${myBuilding.cost ? ' - ' + myBuilding.cost + '𝜋' : ''}`}
+                            </div>
+                        </div>
+                    );
+                }) : <></>}
+
                 <div className="map-item" onClick={() => updateActiveBuildings({ ...activeBuildings, houses: !activeBuildings.houses })}>
                     <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
-                        Building <span style={{color: `${activeBuildings.houses ? 'lightgreen' : 'orange'}`}}>{activeBuildings.houses ? ' - Active' : ' - Not Active'}</span>
+                        Building <span style={{ color: `${activeBuildings.houses ? 'lightgreen' : 'orange'}` }}>{activeBuildings.houses ? ' - Active' : ' - Not Active'}</span>
                     </div>
                     <BuildingModel>
                         <MarketHouses nodes={nodes} materials={materials} scale={5} position={[0, -2, 0]} />
                     </BuildingModel>
-                    <div style={{fontSize: '15px'}}>
+                    <div style={{ fontSize: '15px' }}>
                         Houses
                     </div>
                     <div style={{ fontSize: '12px' }}>

@@ -19,6 +19,7 @@ export async function getUser(piAddress) {
     return user;
 }
 
+// AVATAR DATA ======================================================================
 export async function getUserAvatars(piAddress) {
     if (!piAddress) return { error: 'no pi address' };
 
@@ -35,8 +36,6 @@ export async function getUserAvatars(piAddress) {
     // Extract the data from each avatar document
     const avatarData = avatarDocs.map(avatarDoc => {return {...avatarDoc.data(), id: avatarDoc.id}});
 
-    // Log the data
-    console.log(avatarData);
     return avatarData;
 }
 
@@ -49,20 +48,6 @@ export async function updateUserAvatar(piAddress, newAvatar) {
     const updatedDoc = await setDoc(doc(collectionRef, user.id), {
         ...user,
         currentAvatar: newAvatar,
-    });
-
-    return updatedDoc;
-}
-
-export async function updateUserActiveBuildings(piAddress, newActiveBuildings) {
-    if (!piAddress) return { error: 'no pi address' };
-
-    const user = await getUser(piAddress);
-
-    const collectionRef = collection(db, "users");
-    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
-        ...user,
-        activeBuildings: newActiveBuildings,
     });
 
     return updatedDoc;
@@ -88,3 +73,42 @@ export async function addAvatar(piAddress, avatarId) {
 
     return updatedDoc;
 }
+
+// BUILDINGS DATA ======================================================================
+export async function getUserBuildings(piAddress) {
+    if (!piAddress) return { error: 'no pi address' };
+
+    const user = await getUser(piAddress);
+
+    const collectionRef = collection(db, "users");
+    const userDoc = await getDoc(doc(collectionRef, user.id));
+    const { buildings } = userDoc.data();
+    const buildingPromises = buildings.map(avatarRef => getDoc(avatarRef));
+
+    // Wait for all avatar documents to be fetched
+    const buildingDocs = await Promise.all(buildingPromises);
+
+    // Extract the data from each avatar document
+    const buildingData = buildingDocs.map(buildingDoc => {return {...buildingDoc.data(), id: buildingDoc.id}});
+
+    // Log the data
+    console.log(buildingData);
+    return buildingData;
+}
+
+
+export async function updateUserActiveBuildings(piAddress, newActiveBuildings) {
+    if (!piAddress) return { error: 'no pi address' };
+
+    const user = await getUser(piAddress);
+
+    const collectionRef = collection(db, "users");
+    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
+        ...user,
+        activeBuildings: newActiveBuildings,
+    });
+
+    return updatedDoc;
+}
+
+

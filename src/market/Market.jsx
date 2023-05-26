@@ -213,30 +213,54 @@ export default function Market() {
                                     )
                                     )}
 
-                                    {buildings?.map(building => {
-                                        return (
-                                            <div className="map-item" key={building.id} onClick={() => setBuyBuildingModal(building)}>
-                                                <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
-                                                    {building.type}
-                                                </div>
-                                                <BuildingModel>
-                                                    {building.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                    {building.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                    {building.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                    {building.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                    {building.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                    {building.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
-                                                </BuildingModel>
-                                                <div style={{ fontSize: '15px' }}>
-                                                    {building.name}
-                                                </div>
-                                                <div style={{ fontSize: '12px' }}>
-                                                    <span style={{ color: `${building.rarity === "Rare" ? 'gold' : 'green'}` }}>{building.rarity}</span> - {`${building.cost}𝜋`}
-                                                </div>
+                                    {buildings?.map(building => currentUser?.buildings.length > 0 ? currentUser?.buildings.map(ownedBuilding => ownedBuilding.id === building.id ? <></> : (
+                                        <div className="map-item" key={building.id} onClick={() => setBuyBuildingModal(building)}>
+                                            <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
+                                                {building.type}
                                             </div>
-                                        );
-                                    })}
-
+                                            <BuildingModel>
+                                                {building.name === "Houses" ? <MarketHouses nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Windmill" ? <MarketWindmill nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Waterwheel" ? <MarketWaterwheel nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            </BuildingModel>
+                                            <div style={{ fontSize: '15px' }}>
+                                                {building.name}
+                                            </div>
+                                            <div style={{ fontSize: '12px' }}>
+                                                <span style={{ color: `${building.rarity === "Rare" ? 'gold' : 'green'}` }}>{building.rarity}</span> - {`${building.cost}𝜋`}
+                                            </div>
+                                        </div>
+                                    )) : (
+                                        <div className="map-item" key={building.id} onClick={() => setBuyBuildingModal(building)}>
+                                            <div style={{ width: '100%', textAlign: 'start', fontSize: '12px', color: '#E6E6FA' }}>
+                                                {building.type}
+                                            </div>
+                                            <BuildingModel>
+                                                {building.name === "Houses" ? <MarketHouses nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Windmill" ? <MarketWindmill nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Waterwheel" ? <MarketWaterwheel nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Banks" ? <MarketBanks nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Blacksmith" ? <MarketBlacksmith nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Cannon" ? <MarketCannon nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Crossbows" ? <MarketCrossbows nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Mansion" ? <MarketMansion nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                                {building.name === "Pub" ? <MarketPub nodes={nodes} materials={materials} scale={3} position={[0, -2, 0]} /> : <></>}
+                                            </BuildingModel>
+                                            <div style={{ fontSize: '15px' }}>
+                                                {building.name}
+                                            </div>
+                                            <div style={{ fontSize: '12px' }}>
+                                                <span style={{ color: `${building.rarity === "Rare" ? 'gold' : 'green'}` }}>{building.rarity}</span> - {`${building.cost}𝜋`}
+                                            </div>
+                                        </div>
+                                    )
+                                    )}
                                 </div>
                             </>)}
                         </>

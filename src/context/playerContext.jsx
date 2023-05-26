@@ -62,15 +62,15 @@ export const PlayerProvider = ({ children }) => {
 
     // Map Context =======================================================================
     const [activeBuildings, setActiveBuildings] = useState({
-        banks: true,
-        blacksmith: true,
-        cannon: true,
-        crossbows: true,
-        houses: true,
-        mansion: true,
-        pub: true,
-        waterwheel: true,
-        windmill: true,
+        banks: false,
+        blacksmith: false,
+        cannon: false,
+        crossbows: false,
+        houses: false,
+        mansion: false,
+        pub: false,
+        waterwheel: false,
+        windmill: false,
     });
 
     const updateActiveBuildings = async (newActiveBuildings) => {
@@ -80,13 +80,6 @@ export const PlayerProvider = ({ children }) => {
         await updateUserActiveBuildings(currentUser.piAddress, newActiveBuildings);
         setActiveBuildings(newActiveBuildings);
     }
-
-
-    // useEffect(() => {
-    //     if(!loading && currentUser && currentUser.activeBuildings){
-    //         setActiveBuildings(currentUser.activeBuildings);
-    //     }    
-    // }, [currentUser])
 
    
     const value = {
