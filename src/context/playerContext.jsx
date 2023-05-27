@@ -50,7 +50,7 @@ export const PlayerProvider = ({ children }) => {
     const getUserPiWallet = async () => {
         // const scopes = ['username', 'payments', 'wallet_address'];
         // const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-        // console.log(authRes)
+        console.log(window.Pi)
         return '0x7326689326798236963'
     }
 
