@@ -38,7 +38,7 @@ export const PlayerProvider = ({ children }) => {
             setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })
         }
     }, []);
-    
+
     useEffect(() => {
         if (currentUser) {
             localStorage.clear();
@@ -48,8 +48,9 @@ export const PlayerProvider = ({ children }) => {
     }, [currentUser]);
 
     const getUserPiWallet = async () => {
-        // const scopes = ['username', 'payments', 'wallet_address'];
-        // const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+        const scopes = ['username', 'payments', 'wallet_address'];
+        const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+        console.log(1000,authRes)
         return '0x7326689326798236963'
     }
 
@@ -57,7 +58,6 @@ export const PlayerProvider = ({ children }) => {
     const login = async () => {
         setLoading(true);
         const piAddress = await getUserPiWallet();
-        const user = await getUser(piAddress);
         if (!user) return;
         if (user.error) {
             console.log(user.error);
