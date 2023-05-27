@@ -58,6 +58,7 @@ export const PlayerProvider = ({ children }) => {
     const login = async () => {
         setLoading(true);
         const piAddress = await getUserPiWallet();
+        const user = getUser(piAddress);
         if (!user) return;
         if (user.error) {
             console.log(user.error);
