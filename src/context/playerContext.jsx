@@ -50,7 +50,7 @@ export const PlayerProvider = ({ children }) => {
     const getUserPiWallet = async () => {
         // const scopes = ['username', 'payments', 'wallet_address'];
         // const authRes = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-        console.log(1000,authRes)
+        // console.log(authRes)
         return '0x7326689326798236963'
     }
 
@@ -58,7 +58,7 @@ export const PlayerProvider = ({ children }) => {
     const login = async () => {
         setLoading(true);
         const piAddress = await getUserPiWallet();
-        const user = getUser(piAddress);
+        const user = await getUser(piAddress);
         if (!user) return;
         if (user.error) {
             console.log(user.error);
