@@ -50,14 +50,14 @@ export const PlayerProvider = ({ children }) => {
     const getUserPiWallet = async () => {
         try {
             const Pi = window.Pi;
-            Pi.init({ version: "2.0", sandbox: true })
+            await Pi.init({ version: "2.0", sandbox: true })
             // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
             const scopes = ['username', 'payments', 'wallet_address'];
             function onIncompletePaymentFound(payment) {
                 
             }; // Read more about this in the SDK reference
 
-            Pi.authenticate(scopes, onIncompletePaymentFound).then(function(authRes) {
+            await Pi.authenticate(scopes, onIncompletePaymentFound).then(function(authRes) {
                console.log(authRes)
             }).catch(function(error) {
                 //Pi.openShareDialog("Error", error);
