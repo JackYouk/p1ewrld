@@ -4,6 +4,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 // Lib/firestore
 import { getUser, updateUserActiveBuildings, updateUserAvatar } from "../lib/users";
 
+// Pi Network
+import { Pi } from '@pinetwork-js/sdk';
+
 const Context = createContext();
 
 export const PlayerProvider = ({ children }) => {
@@ -48,14 +51,10 @@ export const PlayerProvider = ({ children }) => {
     }, [currentUser]);
 
     const getUserPiWallet = async () => {
-        const PiNetworkClient = window.PiNetwork;
-        try {
-            const user = await PiNetworkClient.Authenticate()
-            console.log(`Hello ${user.username}`)
-            console.log(user)
-          } catch (err) {
-            // Not able to fetch the user
-          }
+        await Pi.init({ version: "2.0", sandbox: true });
+        const scopes = ['username', 'payments', 'wallet_address'];
+        const authRes = await Pi.authenticate(scopes, () => console.log('incomplete payment found'))
+        console.log(authRes);
         return '0x7326689326798236963'
     }
 

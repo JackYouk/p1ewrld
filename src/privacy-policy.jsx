@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function PrivacyPolicy() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
         <div style={{overflowY: 'scroll'}}>
