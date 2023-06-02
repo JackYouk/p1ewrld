@@ -83,6 +83,22 @@ export default function Interface() {
                                         Built By JackJack
                                     </div>
                                 </div>     
+
+                                <div
+                                    className="game-item"
+                                    style={{
+                                        filter: `${selectedGame.game === 'P1E F1' ? 'none' : ''}`,
+                                        background: `url("https://th.bing.com/th/id/OIP.yI1IWmdukXUamskCX5AaxgHaEo?pid=ImgDet&rs=1")`
+                                    }}
+                                    onClick={(e) => { setSelectedGame({ game: 'P1E F1', slug: '/p1e-f1' }) }}
+                                >
+                                    <div style={{}}>
+                                        P1E F1
+                                    </div>
+                                    <div style={{ fontSize: '15px' }}>
+                                        Built By JackJack
+                                    </div>
+                                </div>     
                             </div>
                         </div>
                     </>

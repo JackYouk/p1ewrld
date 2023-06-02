@@ -12,7 +12,7 @@ import { PlayerContext } from '../context/playerContext.jsx'
 import { ControlsContext } from '../context/controlsContext.jsx'
 
 
-export default function Player({colliders, position, restitution, linearDamping, angularDamping, friction}) {
+export default function Player({colliders, position, restitution, linearDamping, jumpStrength, angularDamping, friction, resetPosition}) {
     const { avatar, setAvatar } = PlayerContext();
     const {cameraZoom, setCameraZoom, controls, setControls} = ControlsContext();
     const body = useRef()
@@ -28,13 +28,14 @@ export default function Player({colliders, position, restitution, linearDamping,
         const ray = new rapier.Ray(origin, direction)
         const hit = rapierWorld.castRay(ray, 10, true)
 
-        if (hit.toi < 0.15) {
-            body.current.applyImpulse({ x: 0, y: 0.1, z: 0 })
-        }
+        // if(!hit) return
+        // if (hit.toi < 0.15) {
+            body.current.applyImpulse({ x: 0, y: jumpStrength ?? 0.1, z: 0 })
+        // }
     }
 
     const reset = () => {
-        body.current.setTranslation({ x: 0, y: 1, z: 0 })
+        body.current.setTranslation(resetPosition ?? { x: 0, y: 1, z: 0 })
         body.current.setLinvel({ x: 0, y: 0, z: 0 })
         body.current.setAngvel({ x: 0, y: 0, z: 0 })
     }
