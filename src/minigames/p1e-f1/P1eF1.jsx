@@ -24,8 +24,22 @@ export default function P1eF1() {
         hitSound.play();
     }
 
+    const [hasF1Avatar, setHasF1Avatar] = useState(false);
+    const [avatarUnlockedModal, setAvatarUnlockedModal] = useState(false);
+
+    const unlockF1Avatar = () => {
+        // add f1 avatar to collection firebase
+        setHasF1Avatar(true);
+        setAvatarUnlockedModal(true);
+    }
+
     return (
         <>
+            {avatarUnlockedModal ? (
+                <div onClick={() => setAvatarUnlockedModal(false)} style={{position: 'absolute', display: 'flex', justifyContent: 'center', alignItems: 'center', top: 0, left: 0, zIndex: 100, color: 'white', width: '100%', height: '100dvh', backgroundColor: '#ffffff99',}}>
+                    <div style={{fontSize: '40px', fontWeight: 'bolder'}}>Avatar Unlocked!</div>
+                </div>
+            ) : <></>}
             <Canvas
                 shadows
                 camera={{
@@ -52,7 +66,11 @@ export default function P1eF1() {
                             jumpStrength={0.5}
                         />
 
-
+                        {!hasF1Avatar ? (
+                            <RigidBody onCollisionEnter={() => unlockF1Avatar()} colliders='hull' type='fixed' position={[1.8, 5, -2.5]}>
+                                <Gltf src='./f1pie.glb' scale={0.2}></Gltf>
+                            </RigidBody>
+                        ) : <></>}
 
                         {/* Floor */}
                         <RigidBody colliders='trimesh' type='fixed' restitution={0} friction={0} position={[0, 0, 0]}>
