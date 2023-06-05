@@ -8,6 +8,8 @@ body,
     height: 100vh;
     background: ivory;
     font-family: 'Bebas Neue', cursive;
+    user-select: none;
+
 }
 
 /* .dragControls{
