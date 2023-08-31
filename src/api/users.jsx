@@ -27,7 +27,7 @@ export async function getUser(piToken) {
     if (matchedUsers.length === 1){
         user = matchedUsers[0];
     } else {
-        user = createUser(piAddress);
+        user = createUser(piToken);
     }
 
     return user;
