@@ -88,7 +88,8 @@ export async function addAvatar(currentUser, avatarId) {
     if (!currentUser) return { error: 'no currentUser' };
 
     const avatarRef = doc(db, 'avatars', avatarId);
-    const newAvatar = await getDoc(avatarRef);
+    const newAvatarSnap = await getDoc(avatarRef);
+    const newAvatar = {id: newAvatarSnap.id, ...newAvatarSnap.data()}
     console.log(newAvatar)
     console.log(currentUser.avatars)
     const newAvatars = [];
