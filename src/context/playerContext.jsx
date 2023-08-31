@@ -52,7 +52,8 @@ export const PlayerProvider = ({ children }) => {
         const scopes = ['username', 'payments', 'wallet_address'];
         const authRes = await window.Pi.authenticate(scopes, () => console.log('incomplete payment found'))
         console.log(authRes);
-        return '0x7326689326798236963'
+        if(!authRes) return;
+        return authRes.user.uid;
     }
 
     // login with pi network and check users table of firestore
