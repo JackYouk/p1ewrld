@@ -27,7 +27,7 @@ export default function Interface() {
                             top: '0',
                             left: '0',
                             width: '100%',
-                            height: '100dvh',
+                            height: '100%',
                             backgroundColor: '#00000099',
                         }}>
                             <div style={{
