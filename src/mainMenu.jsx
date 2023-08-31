@@ -76,11 +76,15 @@ extend({ PortalMaterial })
 function Scene() {
     const portalMaterial1 = useRef();
     const portalMaterial2 = useRef();
+    const portalMaterial3 = useRef();
+    const portalMaterial4 = useRef();
     const pie1 = useRef();
 
     useFrame((state, delta) => {
         portalMaterial1.current.iTime += delta*.5;
         portalMaterial2.current.iTime += delta*.5;
+        portalMaterial3.current.iTime += delta*.5;
+        portalMaterial4.current.iTime += delta*.5;
         pie1.current.rotation.y += delta * 0.1;
     });
 
@@ -106,11 +110,11 @@ function Scene() {
         <Center position={[0, -3, 0]}>
         <Text3D scale={0.3} position-x={-1.4}  font="./Lilita_One_Regular.json">
             TAP TO
-            <portalMaterial ref={portalMaterial2} />
+            <portalMaterial ref={portalMaterial4} />
         </Text3D>
         <Text3D scale={0.3}  font="./Lilita_One_Regular.json">
             CONTINUE
-            <portalMaterial ref={portalMaterial1} />
+            <portalMaterial ref={portalMaterial3} />
         </Text3D>
         </Center>
         </>

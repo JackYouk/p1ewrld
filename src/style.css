@@ -6,7 +6,7 @@ body,
     left: 0;
     width: 100%;
     height: calc(100% - 5px);
-    background: ivory;
+    background: rgb(250, 235, 238);
     font-family: 'Bebas Neue', cursive;
     user-select: none;
 
