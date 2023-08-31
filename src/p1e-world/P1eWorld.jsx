@@ -37,7 +37,7 @@ export default function Game() {
                     </Physics>
                 </Suspense>
             </Canvas>
-            <Loader />
+            {/* <Loader /> */}
             <Interface />
         </>
     )
