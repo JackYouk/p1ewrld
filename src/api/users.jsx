@@ -25,11 +25,10 @@ export async function createUser(piToken) {
         avatars: [],
         buildings: [],
     });
-    console.log(docRef)
     const docSnap = await getDoc(docRef);
-    console.log(docSnap)
     if(!docSnap.exists()) return;
-    return {id: docSnap.id, ...docSnap()};
+    const user = {id: docSnap.id, ...docSnap()}
+    return user;
 }
 
 export async function getUser(piToken) {
