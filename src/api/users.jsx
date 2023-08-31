@@ -27,6 +27,8 @@ export async function createUser(piToken) {
     });
     console.log(docRef)
     const docSnap = await getDoc(docRef);
+    console.log(docSnap)
+    if(!docSnap.exists()) return;
     return {id: docSnap.id, ...docSnap()};
 }
 
