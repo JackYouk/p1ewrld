@@ -7,22 +7,12 @@ import { Physics, Debug, RigidBody, InstancedRigidBodies, } from '@react-three/r
 import { Gltf, Loader } from '@react-three/drei'
 
 // Game Components
-import Interface from '../../game-components/Interface'
-import Lights from '../../game-components/Lights.jsx'
-import Player from '../../game-components/Player.jsx'
+import Interface from '../game-components/Interface'
+import Lights from '../game-components/Lights.jsx'
+import Player from '../game-components/Player.jsx'
 import { Racetrack } from './RacetrackModel'
 
 export default function P1eF1() {
-    const [hitSound] = useState(() => new Audio('./hit.mp3'));
-
-    let COUNT = 1;
-
-
-    const handleCollision = () => {
-        hitSound.currentTime = 0;
-        hitSound.volume = Math.random()
-        hitSound.play();
-    }
 
     const [hasF1Avatar, setHasF1Avatar] = useState(false);
     const [avatarUnlockedModal, setAvatarUnlockedModal] = useState(false);

@@ -16,7 +16,8 @@ export default function BuildingModel({children}) {
         style={{ height: '100px', width: '120px' }}
         >
         <Suspense fallback={null}>
-            <Environment preset="city" />
+            {/* <ambientLight /> */}
+            <pointLight />
             {children}
         </Suspense>
     </Canvas>

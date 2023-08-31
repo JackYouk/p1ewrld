@@ -12,8 +12,6 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
-    "@pinetwork-js/api-typing": "^0.7.0",
-    "@pinetwork-js/sdk": "^0.6.0",
     "@react-three/drei": "^9.51.24",
     "@react-three/fiber": "^8.10.0",
     "@react-three/postprocessing": "^2.7.0",

@@ -15,7 +15,8 @@ export default function ItemModel({ glb, scale }) {
             style={{ height: '100px', width: '120px' }}
         >
             <Suspense fallback={null}>
-                <Environment preset="city" />
+                <ambientLight intensity={0.6} />
+                <pointLight intensity={1} />
                 <Gltf src={glb} rotation-x={0.5} scale={scale} />
             </Suspense>
         </Canvas>

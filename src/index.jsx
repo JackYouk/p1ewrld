@@ -5,11 +5,10 @@ import P1eWorld from './p1e-world/P1eWorld'
 import Market from './market/Market'
 import { ControlsProvider } from './context/controlsContext'
 import { PlayerProvider } from './context/playerContext'
-import PrivacyPolicy from './privacy-policy'
+// import PrivacyPolicy from './privacy-policy'
 
 // Mini Games
-import P1eStacker from './minigames/p1e-stacker/P1eStacker'
-import P1eF1 from './minigames/p1e-f1/P1eF1'
+import P1eF1 from './p1e-f1/P1eF1'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
@@ -23,12 +22,12 @@ root.render(
                             <Route path="/" element={<P1eWorld />} />
                             <Route path="/market" element={<Market />} />
 
-                            {/* Mini Games Routes */}
-                            <Route path="/p1e-stacker" element={<P1eStacker />} />
+                            {/* Games Routes */}
+                            <Route path="/wrld" element={<P1eWorld />} />
                             <Route path="/p1e-f1" element={<P1eF1 />} />
 
                             {/* Misc */}
-                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                            {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> */}
 
                             {/* CatchAll Route */}
                             <Route path="/*" element={<P1eWorld />} />
