@@ -2,7 +2,7 @@ import { collection, query, where, getDocs, getDoc, setDoc, doc, addDoc } from "
 import { db } from './firebase';
 
 export async function createUser(piToken) {
-    const docRef = await addDoc(collection(db, "cities"), {
+    const docRef = await addDoc(collection(db, "users"), {
         piAddress: piToken.user.uid,
         totalPi: 3.14,
         username: piToken.user.username,
