@@ -6,10 +6,28 @@ export async function createUser(piToken) {
         piAddress: piToken.user.uid,
         totalPi: 3.14,
         username: piToken.user.username,
+        currentAvatar: {
+            gameScale: 0.04,
+            glb: "pie.glb",
+            marketScale: 0.65
+        },
+        activeBuildings: {
+            banks: false,
+            blacksmith: false,
+            cannon: false,
+            crossbows: false,
+            houses: true,
+            mansion: true,
+            windmill: false,
+            pub: false,
+            waterwheel: false
+        },
+        avatars: [],
+        buildings: [],
     });
     console.log(docRef)
     const docSnap = await getDoc(docRef);
-    return {id: docSnap.id, ...docSnap};
+    return {id: docSnap.id, ...docSnap()};
 }
 
 export async function getUser(piToken) {
