@@ -89,6 +89,8 @@ export async function addAvatar(currentUser, avatarId) {
 
     const avatarRef = doc(db, 'avatars', avatarId);
     const newAvatar = getDoc(avatarRef);
+    console.log(newAvatar)
+    console.log(currentUser.avatars)
     const newAvatars = [];
     currentUser.avatars.map(avatar => newAvatars.push(avatar))
     newAvatars.push(newAvatar);

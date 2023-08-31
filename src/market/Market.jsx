@@ -76,7 +76,7 @@ export default function Market() {
     const buyAvatar = async (avatarId, cost, posterWallet) => {
         console.log(avatarId, cost, posterWallet);
         setBuyBtnState('Buying');
-        await addAvatar(currentUser.piAddress, avatarId);
+        await addAvatar(currentUser, avatarId);
         await getAvatars();
         setBuyBtnState('Bought');
     }
