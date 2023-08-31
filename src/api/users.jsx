@@ -16,8 +16,8 @@ export async function createUser(piToken) {
             blacksmith: false,
             cannon: false,
             crossbows: false,
-            houses: true,
-            mansion: true,
+            houses: false,
+            mansion: false,
             windmill: false,
             pub: false,
             waterwheel: false
@@ -88,8 +88,10 @@ export async function addAvatar(currentUser, avatarId) {
     if (!currentUser) return { error: 'no currentUser' };
 
     const avatarRef = doc(db, 'avatars', avatarId);
-    const newAvatars = currentUser.avatars;
-    newAvatars.push(avatarRef);
+    const newAvatar = getDoc(avatarRef);
+    const newAvatars = [];
+    currentUser.avatars.map(avatar => newAvatars.push(avatar))
+    newAvatars.push(newAvatar);
 
     const collectionRef = collection(db, "users");
     const updatedDoc = await setDoc(doc(collectionRef, currentUser.id), {
