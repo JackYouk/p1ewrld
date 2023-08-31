@@ -74,35 +74,28 @@ export async function getUserAvatars(piAddress) {
     return avatarData;
 }
 
-export async function updateUserAvatar(piAddress, newAvatar) {
-    if (!piAddress) return { error: 'no pi address' };
-
-    const user = await getUser(piAddress);
+export async function updateUserAvatar(currentUser, newAvatar) {
+    if (!currentUser) return { error: 'no current user' };
 
     const collectionRef = collection(db, "users");
-    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
-        ...user,
+    const updatedDoc = await setDoc(doc(collectionRef, currentUser.id), {
+        ...currentUser,
         currentAvatar: newAvatar,
     });
 
     return updatedDoc;
 }
 
-export async function addAvatar(piAddress, avatarId) {
-    if (!piAddress) return { error: 'no pi address' };
-
-    const user = await getUser(piAddress);
-
-    if(!user) return;
+export async function addAvatar(currentUser, avatarId) {
+    if (!currentUser) return { error: 'no currentUser' };
 
     const avatarRef = doc(db, 'avatars', avatarId);
-
     const newAvatars = user.avatars;
     newAvatars.push(avatarRef);
 
     const collectionRef = collection(db, "users");
-    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
-        ...user,
+    const updatedDoc = await setDoc(doc(collectionRef, currentUser.id), {
+        ...currentUser,
         avatars: newAvatars,
     });
 
