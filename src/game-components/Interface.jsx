@@ -34,7 +34,7 @@ export default function Interface() {
                                 display: 'flex',
                                 padding: '5px',
                                 margin: '10px',
-                                marginTop: '100px',
+                                marginTop: '150px',
                                 borderRadius: '3px',
                                 flexDirection: `column`,
                                 overflowY: 'scroll',

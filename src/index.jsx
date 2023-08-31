@@ -6,9 +6,8 @@ import Market from './market/Market'
 import { ControlsProvider } from './context/controlsContext'
 import { PlayerProvider } from './context/playerContext'
 // import PrivacyPolicy from './privacy-policy'
-
-// Mini Games
 import P1eF1 from './p1e-f1/P1eF1'
+import MainMenu from './mainMenu'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
@@ -19,7 +18,7 @@ root.render(
                         <Routes>
                             
                             {/* Main Routes */}
-                            <Route path="/" element={<P1eWorld />} />
+                            <Route path="/" element={<MainMenu />} />
                             <Route path="/market" element={<Market />} />
 
                             {/* Games Routes */}
