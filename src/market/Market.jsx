@@ -27,7 +27,7 @@ import { BuildingData } from "./data/BuildingData";
 import { AvatarData } from "./data/AvatarData";
 
 // lib/firebase
-import { addAvatar } from "../lib/users";
+import { addAvatar } from "../api/users";
 
 export default function Market() {
     const navigate = useNavigate();

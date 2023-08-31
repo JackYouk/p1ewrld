@@ -20,7 +20,7 @@ import {
 } from "../p1e-world/world-assets/buildings";
 
 // Lib/Firebase
-import { getUserAvatars, getUserBuildings } from "../lib/users";
+import { getUserAvatars, getUserBuildings } from "../api/users";
 
 
 export default function MyCollection() {

@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Lib/firestore
-import { getUser, updateUserActiveBuildings, updateUserAvatar } from "../lib/users";
+import { getUser, updateUserActiveBuildings, updateUserAvatar } from "../api/users";
 
 
 const Context = createContext();
@@ -48,19 +48,19 @@ export const PlayerProvider = ({ children }) => {
         }
     }, [currentUser]);
 
-    const getUserPiWallet = async () => {
+    const getUserPiToken = async () => {
         const scopes = ['username', 'payments', 'wallet_address'];
         const authRes = await window.Pi.authenticate(scopes, () => console.log('incomplete payment found'))
         console.log(authRes);
         if(!authRes) return;
-        return authRes.user.uid;
+        return authRes;
     }
 
     // login with pi network and check users table of firestore
     const login = async () => {
         setLoading(true);
-        const piAddress = await getUserPiWallet();
-        const user = await getUser(piAddress);
+        const piToken = await getUserPiToken();
+        const user = await getUser(piToken);
         if (!user) return;
         if (user.error) {
             console.log(user.error);

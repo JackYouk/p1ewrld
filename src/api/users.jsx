@@ -1,21 +1,35 @@
-import { collection, query, where, getDocs, getDoc, setDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, getDoc, setDoc, doc, addDoc } from "firebase/firestore";
 import { db } from './firebase';
 
-export async function getUser(piAddress) {
-    console.log(piAddress)
-    if (!piAddress) return { error: 'no pi address' }
+export async function createUser(piToken) {
+    const docRef = await addDoc(collection(db, "cities"), {
+        piAddress: piToken.user.uid,
+        totalPi: 3.14,
+        username: piToken.user.username,
+    });
+    console.log(docRef)
+    return {id: docRef.id, ...docRef.data()}
+}
+
+export async function getUser(piToken) {
+    console.log(piToken)
+    if (!piToken) return { error: 'no pi token' }
     const q = query(
         collection(db, "users"),
-        where("piAddress", "==", piAddress)
+        where("piAddress", "==", piToken.user.uid)
     );
     const matchedUsers = [];
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(doc => matchedUsers.push({ ...doc.data(), id: doc.id }))
 
     if (matchedUsers.length > 1) return { error: 'too many matched users' };
-    if (matchedUsers.length === 0) return { error: 'cant find user' };
+    let user;
+    if (matchedUsers.length === 1){
+        user = matchedUsers[0];
+    } else {
+        user = createUser(piAddress);
+    }
 
-    const user = matchedUsers[0];
     return user;
 }
 
