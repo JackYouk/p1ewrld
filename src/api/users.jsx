@@ -8,7 +8,8 @@ export async function createUser(piToken) {
         username: piToken.user.username,
     });
     console.log(docRef)
-    return {id: docRef.id, ...docRef.data()}
+    const docSnap = await getDoc(docRef);
+    return {id: docSnap.id, ...docSnap};
 }
 
 export async function getUser(piToken) {
