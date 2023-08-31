@@ -55,13 +55,11 @@ export async function getUser(piToken) {
 }
 
 // AVATAR DATA ======================================================================
-export async function getUserAvatars(piAddress) {
+export async function getUserAvatars(currentUser) {
     if (!piAddress) return { error: 'no pi address' };
 
-    const user = await getUser(piAddress);
-
     const collectionRef = collection(db, "users");
-    const userDoc = await getDoc(doc(collectionRef, user.id));
+    const userDoc = await getDoc(doc(collectionRef, currentUser.id));
     const { avatars } = userDoc.data();
     const avatarPromises = avatars.map(avatarRef => getDoc(avatarRef));
 
@@ -90,7 +88,7 @@ export async function addAvatar(currentUser, avatarId) {
     if (!currentUser) return { error: 'no currentUser' };
 
     const avatarRef = doc(db, 'avatars', avatarId);
-    const newAvatars = user.avatars;
+    const newAvatars = currentUser.avatars;
     newAvatars.push(avatarRef);
 
     const collectionRef = collection(db, "users");
@@ -103,13 +101,11 @@ export async function addAvatar(currentUser, avatarId) {
 }
 
 // BUILDINGS DATA ======================================================================
-export async function getUserBuildings(piAddress) {
-    if (!piAddress) return { error: 'no pi address' };
-
-    const user = await getUser(piAddress);
+export async function getUserBuildings(currentUser) {
+    if (!currentUser) return { error: 'no pi address' };
 
     const collectionRef = collection(db, "users");
-    const userDoc = await getDoc(doc(collectionRef, user.id));
+    const userDoc = await getDoc(doc(collectionRef, currentUser.id));
     const { buildings } = userDoc.data();
     const buildingPromises = buildings.map(avatarRef => getDoc(avatarRef));
 
@@ -125,14 +121,13 @@ export async function getUserBuildings(piAddress) {
 }
 
 
-export async function updateUserActiveBuildings(piAddress, newActiveBuildings) {
-    if (!piAddress) return { error: 'no pi address' };
+export async function updateUserActiveBuildings(currentUser, newActiveBuildings) {
+    if (!currentUser) return { error: 'no pi address' };
 
-    const user = await getUser(piAddress);
 
     const collectionRef = collection(db, "users");
-    const updatedDoc = await setDoc(doc(collectionRef, user.id), {
-        ...user,
+    const updatedDoc = await setDoc(doc(collectionRef, currentUser.id), {
+        ...currentUser,
         activeBuildings: newActiveBuildings,
     });
 

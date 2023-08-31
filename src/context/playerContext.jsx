@@ -86,7 +86,7 @@ export const PlayerProvider = ({ children }) => {
         if (!currentUser) return;
         if (!currentUser.piAddress) return;
         setCurrentUser({ ...currentUser, currentAvatar: newAvatar })
-        await updateUserAvatar(currentUser.piAddress, newAvatar)
+        await updateUserAvatar(currentUser, newAvatar)
         setAvatar(newAvatar)
     }
 
@@ -95,9 +95,8 @@ export const PlayerProvider = ({ children }) => {
 
     const updateActiveBuildings = async (newActiveBuildings) => {
         if (!currentUser) return;
-        if (!currentUser.piAddress) return;
         setCurrentUser({ ...currentUser, activeBuildings: newActiveBuildings })
-        await updateUserActiveBuildings(currentUser.piAddress, newActiveBuildings);
+        await updateUserActiveBuildings(currentUser, newActiveBuildings);
         setActiveBuildings(newActiveBuildings);
     }
 
