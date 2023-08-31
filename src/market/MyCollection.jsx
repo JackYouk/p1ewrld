@@ -32,8 +32,9 @@ export default function MyCollection() {
 
     const getAvatars = async () => {
         if (!currentUser) return;
-        const piAddress = currentUser.piAddress;
-        const avatars = await getUserAvatars(piAddress);
+        // const piAddress = currentUser.piAddress;
+        // const avatars = await getUserAvatars(piAddress);
+        const avatars = currentUser.avatars;
         setMyAvatars(avatars)
     }
 
@@ -41,8 +42,9 @@ export default function MyCollection() {
 
     const getBuildings = async () => {
         if (!currentUser) return;
-        const piAddress = currentUser.piAddress;
-        const buildings = await getUserBuildings(piAddress);
+        // const piAddress = currentUser.piAddress;
+        // const buildings = await getUserBuildings(piAddress);
+        const buildings = currentUser.buildings;
         setMyBuildings(buildings)
     }
 
