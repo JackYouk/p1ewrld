@@ -20,41 +20,25 @@ export const PlayerProvider = ({ children }) => {
     // AUTH CONTEXT ====================================================================
     const [currentUser, setCurrentUser] = useState(null);
     useEffect(() => {
-        const lsUserStr = localStorage.getItem("currentUser");
-        const lsUser = JSON.parse(lsUserStr);
-        if (lsUser) {
-            setCurrentUser(lsUser);
-            setAvatar(lsUser.currentAvatar);
-            setActiveBuildings(lsUser.activeBuildings);
-        } else {
-            setActiveBuildings({
-                banks: false,
-                blacksmith: false,
-                cannon: false,
-                crossbows: false,
-                houses: false,
-                mansion: false,
-                pub: false,
-                waterwheel: false,
-                windmill: false,
-            })
-            setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })
-        }
+        setActiveBuildings({
+            banks: false,
+            blacksmith: false,
+            cannon: false,
+            crossbows: false,
+            houses: false,
+            mansion: false,
+            pub: false,
+            waterwheel: false,
+            windmill: false,
+        })
+        setAvatar({ glb: 'pie.glb', gameScale: 0.04, marketScale: 0.65 })
     }, []);
-
-    useEffect(() => {
-        if (currentUser) {
-            localStorage.clear();
-            const userStr = JSON.stringify(currentUser);
-            localStorage.setItem("currentUser", userStr);
-        }
-    }, [currentUser]);
 
     const getUserPiToken = async () => {
         const scopes = ['username', 'payments', 'wallet_address'];
         const authRes = await window.Pi.authenticate(scopes, () => console.log('incomplete payment found'))
         console.log(authRes);
-        if(!authRes) return;
+        if (!authRes) return;
         return authRes;
     }
 
@@ -67,9 +51,6 @@ export const PlayerProvider = ({ children }) => {
         if (user.error) {
             console.log(user.error);
         } else {
-            // localStorage.clear();
-            // const userStr = JSON.stringify(user);
-            // localStorage.setItem("currentUser", userStr);
             setCurrentUser(user);
             setAvatar(user.currentAvatar);
             setActiveBuildings(user.activeBuildings);
@@ -78,7 +59,6 @@ export const PlayerProvider = ({ children }) => {
     }
 
     const logout = () => {
-        localStorage.clear();
         setCurrentUser(null);
     }
 

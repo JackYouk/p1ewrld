@@ -10,7 +10,7 @@ export const AvatarData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: 'a2',
+        id: 'BCYBCWY827YB2YBC8937',
         type: 'Avatar',
         filepath: './pizza.glb',
         modelScale: 2.5,
