@@ -1,10 +1,10 @@
 # P1E World
 
-![P1E World Banner](https://p1e-wrld.vercel.app/conceptBanner.png)
+![P1E World Banner](https://p1ewrld.online/menuscreen.png)
 
 P1E World is a comprehensive gaming platform, bringing together various exciting mini-games for a seamless, immersive experience.
 
-**Licenses:** [PiOS](https://github.com/pi-apps/PiOS/blob/main/LICENSE)
+**License:** [PiOS](https://github.com/pi-apps/PiOS/blob/main/LICENSE)
 
 
 **Play now on the testnet!**
