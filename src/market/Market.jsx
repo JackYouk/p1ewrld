@@ -73,8 +73,8 @@ export default function Market() {
 
     const [buyBtnState, setBuyBtnState] = useState('Buy Now');
 
-    const buyAvatar = async (avatarId, cost, posterWallet) => {
-        console.log(avatarId, cost, posterWallet);
+    const buyAvatar = async (avatarId, cost) => {
+        console.log(avatarId, cost);
         setBuyBtnState('Buying');
         const validPayment = await transact(cost, `Buying Avatar #${avatarId}`, { productId: `${avatarId}` });
         if (!validPayment) return;
@@ -109,6 +109,7 @@ export default function Market() {
             onError
         };
         const payment = await window.Pi.createPayment(paymentData, callbacks);
+        if(!payment) return false;
         console.log(payment);
         return true;
     }
@@ -164,7 +165,7 @@ export default function Market() {
                                                 </div>
                                                 <div style={{ display: 'flex', margin: '20px', justifyContent: 'center', alignItems: 'center' }}>
                                                     <div style={{ fontSize: 'x-large' }}>Cost: {buyAvatarModal.cost}</div>
-                                                    <div className="btn-gold" onClick={() => buyAvatar(buyAvatarModal.id, buyAvatarModal.cost, buyAvatarModal.posterWallet)}>{buyBtnState}</div>
+                                                    <div className="btn-gold" onClick={() => buyAvatar(buyAvatarModal.id, buyAvatarModal.cost)}>{buyBtnState}</div>
                                                 </div>
                                             </div>
 
