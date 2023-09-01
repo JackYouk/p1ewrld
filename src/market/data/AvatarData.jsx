@@ -10,13 +10,13 @@ export const AvatarData = [
         posterWallet: '0x56464646746464'
     },
     {
-        id: 'BCYBCWY827YB2YBC8937',
+        id: 'hOiKj9XF6WnpgLANQ7Xu',
         type: 'Avatar',
         filepath: './pizza.glb',
         modelScale: 2.5,
         name: 'Pizza P1E',
         rarity: 'Rare',
-        cost: 50,
+        cost: 31.4,
         posterWallet: '0x56464646746464'
     },
 
