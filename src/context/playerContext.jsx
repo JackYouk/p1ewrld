@@ -8,6 +8,8 @@ import { getUser, updateUserActiveBuildings, updateUserAvatar } from "../api/use
 const Context = createContext();
 
 export const PlayerProvider = ({ children }) => {
+    localStorage.clear();
+
     const [loading, setLoading] = useState(false);
 
     const [activeBuildings, setActiveBuildings] = useState(null);
