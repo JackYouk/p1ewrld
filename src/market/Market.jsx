@@ -76,8 +76,8 @@ export default function Market() {
     const buyAvatar = async (avatarId, cost, posterWallet) => {
         console.log(avatarId, cost, posterWallet);
         setBuyBtnState('Buying');
-        const validPayment = await transact(cost, `Buying Avatar #${avatarId}`, {productId: `${avatarId}`});
-        if(!validPayment) return;
+        const validPayment = await transact(cost, `Buying Avatar #${avatarId}`, { productId: `${avatarId}` });
+        if (!validPayment) return;
         await addAvatar(currentUser, avatarId);
         await getAvatars();
         setBuyBtnState('Bought');
@@ -92,6 +92,12 @@ export default function Market() {
     const onReadyForServerApproval = (paymentId) => console.log("onReadyForServerApproval", paymentId);
     const onReadyForServerCompletion = (paymentId, txid) => console.log("onReadyForServerCompletion", paymentId, txid);
     const onCancel = (paymentId) => console.log("onCancel", paymentId);
+    const onError = (error, payment) => {
+        console.log("onError", error);
+        if (payment) {
+            console.log(payment);
+        }
+    }
     const transact = async (amount, memo, paymentMetadata) => {
         //const memo = '';
         //const paymentMetadata = {productId: ''};
